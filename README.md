@@ -1,461 +1,627 @@
-DATASET DOCUMENTATION
-Trace Element Heterogeneity Within Single Kiln-Load Assemblages at Late Bronze Age Ugarit and Its Confounding Effects on Ceramic Provenance Studies Using Instrumental Neutron Activation Analysis
-Comprehensive XLSX File Structure Reference
-25 Worksheets | 5,000 Rows Per Sheet | 23-44 Columns Per Sheet
-Total: 125,000 Data Records | 33 Elements | 13 Reference Groups
-2026
+1. Introduction and Dataset Overview
+This document provides an exhaustive, column-by-column reference guide for the comprehensive research dataset entitled “Geochemical Differentiation of Alluvial vs. Residual Secondary Clay Deposits Exploited by Neolithic Potters in the Southern Levant: Implications for Localized Resource Territories and Community-Level Craft Organization.” The dataset comprises 18 individual worksheets, each containing precisely 5,000 data records with 17–23 columns, yielding a total of 90,000 records across approximately 360 distinct data fields.
+The dataset integrates geochemical, mineralogical, petrographic, physical, statistical, spatial, and socio-economic parameters that collectively characterise the clay resource landscape of the Southern Levant during the Neolithic period (ca. 9500–4500 BCE). Six primary clay deposit types are represented—alluvial, residual terra rossa, basaltic soil, coastal hamra, Lisan Formation marl, and rendzina—drawn from 31 archaeological sites across 21 physiographic regions spanning the Jordan Valley, coastal plain, hill country, and Transjordanian plateau.
+All quantitative distributions are calibrated to published archaeometric, geochemical, and geological data from the region, ensuring scientific plausibility and internal consistency across sheets. Geochemical variables are modelled with appropriate log-normal distributions and inter-variable covariance structures reflecting the actual correlations observed in published Levantine clay and ceramic compositional datasets.
+The following sections present each sheet in sequential order, providing a narrative description of the sheet’s purpose and scientific context followed by a detailed table defining every column including its data type, expected range, and interpretive significance.
  
-1. Introduction and Scope
-This document provides a comprehensive technical reference for the accompanying Excel workbook entitled 'Ugarit_INAA_Dataset.xlsx,' which contains a systematically generated dummy dataset modelled upon realistic parameters drawn from published Instrumental Neutron Activation Analysis (INAA) studies of Late Bronze Age ceramics from the Eastern Mediterranean. The workbook comprises 25 individual worksheets, each containing a minimum of 5,000 data rows with 23 to 44 columns, collectively encompassing approximately 125,000 records spanning the complete analytical pipeline from raw gamma-ray spectroscopy through final provenance assignment.
-The dataset architecture replicates the structure of genuine archaeometric research conducted at major analytical facilities including the Missouri University Research Reactor (MURR) Archaeometry Laboratory and the Helmholtz-Institut at the University of Bonn. Elemental concentrations, uncertainties, detection limits, statistical outputs, and provenance classifications have been generated using probability distributions parameterised from published reference group means and coefficients of variation for established compositional groups including MYBE (Mycenae/Berbati), TIR (Tiryns), CypH (Cyprus West), CypG (Cyprus East), and multiple local Ugarit production groups.
-The following sections describe each worksheet in detail, providing: (a) the analytical purpose and scientific context of the sheet; (b) the number and nature of rows and columns; and (c) a column-by-column description of every data field including its units, typical value ranges, and interpretive significance within the broader provenance framework.
+2. Dataset Summary
+Sheet #	Sheet Name	Domain	Rows	Columns
+1	Major_Oxide_Geochem	Major oxide geochemistry (SiO₂–LOI)	5,000	21
+2	Trace_Element_Anal	Trace elements (Ba–U, 15 elements)	5,000	22
+3	REE_Profiles	Rare earth elements (La–Lu + ratios)	5,000	23
+4	Clay_Mineralogy_XRD	Clay minerals and XRD diagnostics	5,000	20
+5	Petrographic_Anal	Ceramic thin-section petrography	5,000	19
+6	Ceramic_Sherd_Chem	Ceramic body major oxide chemistry	5,000	19
+7	Weathering_Indices	Chemical weathering indices and ratios	5,000	20
+8	Physical_Properties	Geotechnical and physical properties	5,000	19
+9	NAA_Results	Neutron Activation Analysis data	5,000	23
+10	XRF_Results	X-Ray Fluorescence major oxides	5,000	19
+11	ICP_MS_Results	ICP-MS extended trace elements	5,000	23
+12	PCA_Scores	Principal Component Analysis scores	5,000	18
+13	DFA_Classification	Discriminant Function Analysis results	5,000	17
+14	Site_Catchment	Resource territory and catchment data	5,000	19
+15	Production_Org	Craft organisation and production economy	5,000	20
+16	Provenance_Assign	Integrated provenance determinations	5,000	18
+17	Firing_Temp_Est	Firing temperature estimation	5,000	19
+18	Grain_Size_Distrib	Particle size distribution analysis	5,000	21
+
  
-2. Sheet 1: Sample_Inventory
-Purpose and Scientific Context
-This sheet constitutes the master archaeological metadata registry for all 5,000 ceramic specimens analysed in the dataset. Each row represents one individual ceramic sherd or vessel fragment recovered from Late Bronze Age contexts at Ugarit (Ras Shamra), its harbour settlement Minet el-Beida, and the satellite palatial complex at Ras Ibn Hani, as well as comparative material from neighbouring Syrian and Lebanese coastal sites. The sheet provides the essential contextual framework linking analytical chemistry data in subsequent sheets to specific archaeological findspots, stratigraphic positions, typological classifications, and physical attributes of each specimen.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Unique alphanumeric identifier for each ceramic specimen, following the format UGA-INAA-XXXXX where XXXXX is a zero-padded sequential integer. This identifier serves as the primary key linking all sheets in the workbook.
-Kiln_Load_ID: Identifier grouping specimens hypothesised to originate from the same kiln firing event, formatted as KLN-XXXX. Multiple samples sharing a Kiln_Load_ID are presumed to have been fired contemporaneously, enabling analysis of intra-kiln compositional variability.
-Site_Name: The archaeological site from which the specimen was recovered, including Ras Shamra Acropolis, Ras Shamra Royal Palace, Ras Shamra Ville Sud, Minet el-Beida Harbor, Ras Ibn Hani Palace, Tell Sukas, Tell Tweini, Tell Kazel, Tell Arqa, and Byblos.
-Excavation_Area: The specific designated excavation area or trench within the site, such as Area A through Area F, Trench I through Trench III, or sondage designations corresponding to the French excavation grid system.
-Stratigraphic_Level: The stratigraphic layer designation from which the specimen was excavated, following the site-specific nomenclature (e.g., Level III-b). This provides chronological ordering through the principle of superposition.
-Period: Chronological period assignment based on Courtois (1978) Ugarit phasing system: UR1 (c. 1600-1450 BCE), UR2 (c. 1450-1350 BCE), UR3a (c. 1350-1250 BCE), or UR3b (c. 1250-1185 BCE), corresponding to LB IA through LB IIB in the standard Levantine periodisation.
-Ware_Type: Typological classification of the ceramic ware category, encompassing Local Common Ware, Local Fine Ware, Local Cooking Ware, Canaanite Transport Jar, Mycenaean Import, Cypriot Base Ring, Cypriot White Slip, Cypriot Red Lustrous, Aegean-Type Local Imitation, Handmade Burnished Ware, and related categories.
-Vessel_Form: Morphological classification of the vessel form from which the sherd derives, including bowls, kraters, stirrup jars, pilgrim flasks, jugs, juglets, amphorae, pithoi, cooking pots, chalices, rhyta, pyxides, alabastra, lentoid flasks, and hydriae.
-Fabric_Type: Petrographic classification of the ceramic fabric based on macroscopic and thin-section analysis, describing the dominant non-plastic inclusion suite (e.g., Calcareous Fine, Sand-Tempered, Basalt-Tempered, Talc-Tempered, Grog-Tempered, Mixed Temper, Untempered Fine).
-Surface_Color_Munsell: Surface colour of the ceramic specimen recorded using the Munsell Soil Color Chart notation system (e.g., Buff 10YR 7/3, Reddish Yellow 5YR 6/6), providing standardised colorimetric description.
-Core_Color: Colour of the ceramic body in cross-section, indicating firing atmosphere and completeness (e.g., Gray, Oxidized Red, Sandwich Red-Gray-Red pattern characteristic of incomplete oxidation).
-Sherd_Weight_g: Mass of the ceramic sherd specimen in grams, measured to 0.1 g precision using an analytical balance prior to sub-sampling for INAA analysis.
-Max_Dimension_mm: Maximum dimension of the sherd in millimetres, providing a metric of specimen size relevant to sampling representativeness.
-Wall_Thickness_mm: Thickness of the vessel wall at the point of sampling, measured in millimetres using digital callipers. This parameter relates to vessel function and production technique.
-Temper_Grain_Size_mm: Maximum observed grain size of intentionally added temper inclusions in millimetres, estimated from macroscopic examination or thin-section petrography.
-Temper_Volume_Pct: Estimated volumetric percentage of non-plastic temper inclusions in the ceramic body, determined by point-counting or visual estimation from petrographic thin sections.
-Firing_Atmosphere: Inferred atmospheric conditions during kiln firing: Oxidizing (O2-rich), Reducing (O2-poor), Mixed/Variable, or specific sequential combinations (e.g., Oxidizing-Reducing-Oxidizing sandwich firing).
-Estimated_Firing_Temp_C: Estimated peak firing temperature in degrees Celsius, inferred from mineral phase assemblages, vitrification state, and refiring experiments. Range typically 650-1150 degrees C for LBA Levantine ceramics.
-Compositional_Group: INAA-derived compositional group assignment based on multivariate statistical analysis. Groups include UGA-Local-A, UGA-Local-B, UGA-Local-C, UGA-Cooking, MYBE, TIR, CypH, CypG, Outlier, and Unassigned.
-Provenance_Assignment: Interpreted geographic provenance based on the totality of evidence (INAA group, petrography, typology): Local Ugarit, Argolid (Greece), Tiryns Region, Cyprus West, Cyprus East, Northern Levant, Southern Levant, Unassigned, Ambiguous, or Outlier.
-Excavation_Year: Calendar year in which the specimen was excavated, ranging from 1929 (earliest French excavations under C.F.A. Schaeffer) through 2024 (recent Syrian-international campaigns).
-Catalogue_Number: Museum or excavation catalogue number in the format RS-XX-XXXX, where RS denotes Ras Shamra and the subsequent digits indicate excavation season and sequential find number.
-MURR_Lab_Number: Laboratory accession number assigned by the Missouri University Research Reactor Archaeometry Laboratory upon receipt of the sample for INAA analysis.
-Analyst_Initials: Initials of the analyst who performed the INAA measurement, providing traceability to individual laboratory personnel for quality assurance purposes.
-Analysis_Date: Calendar date on which the INAA measurement was completed, formatted as YYYY-MM-DD in ISO 8601 standard.
+3. Sheet 1: Major Oxide Geochemistry
+3.1 Sheet Overview
+This sheet constitutes the foundational geochemical dataset, containing major oxide compositions (expressed as weight percentages) for 5,000 clay deposit samples collected across the Southern Levant. The data are calibrated to published analytical ranges for six primary clay deposit types exploited by Neolithic potters: residual terra rossa, alluvial clays, basaltic soils, coastal hamra, Lisan Formation marls, and rendzina soils. Each sample is georeferenced to one of 31 archaeological sites spanning the Pre-Pottery Neolithic through Late Neolithic periods. The oxide triad of CaO, Al2O3, and Fe2O3 serves as the primary discriminator between alluvial (high CaO, moderate Al2O3) and residual (low CaO, high Al2O3 and Fe2O3) deposit types, reflecting the fundamental geochemical divergence arising from differential weathering histories and sedimentary transport processes.
+Sheet Name in Workbook: Major_Oxide_Geochemistry
+Total Records: 5,000 rows
+Total Columns: 21
+
+3.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique alphanumeric identifier for each sample in the format MOX-XXXXX, where MOX denotes the Major Oxide dataset and the five-digit suffix provides sequential enumeration. This identifier enables cross-referencing across all 18 sheets within the workbook.
+Site_Name	Full archaeological site name as established in the published literature (e.g., Sha'ar Hagolan, Jericho, Ain Ghazal). Names follow the conventional English transliterations adopted by the Israel Antiquities Authority and the Department of Antiquities of Jordan.
+Site_Code	Three-letter abbreviated site code for compact data representation in statistical analyses and bivariate plots (e.g., SHG for Sha'ar Hagolan, JER for Jericho, ANG for Ain Ghazal).
+Region	Physiographic region within the Southern Levant from which the sample originates. The dataset includes 21 distinct regions such as Central Jordan Valley, Hula Valley, Judean Hills, Southern Coastal Plain, and Transjordan Highlands, reflecting the geological and ecological diversity of the study area.
+Period	Archaeological period assignment following the conventional Southern Levantine Neolithic chronological framework. Codes include PPNA (Pre-Pottery Neolithic A, ca. 9500–8500 BCE), EPPNB, MPPNB, LPPNB, PPNC, YAR (Yarmukian, ca. 6400–5800 BCE), LOD (Lodian), WR (Wadi Rabah), LN (Late Neolithic), and GH (Ghassulian/Early Chalcolithic).
+Clay_Type	Classification of the clay deposit into one of six geochemically distinct categories: Alluvial (transported fluvial sediments), Residual_Terra_Rossa (in-situ weathering product of limestone/dolomite), Basaltic_Soil (derived from Neogene-Quaternary basalt), Coastal_Hamra (red loamy sand of the coastal plain), Lisan_Marl (lacustrine carbonate-detrital deposit), or Rendzina (shallow calcareous soil on chalk/marl substrates).
+Deposit_Context	Sedimentological context describing the depositional environment of the clay source. Categories include Primary in-situ, Secondary reworked, Tertiary alluvial, Colluvial, Lacustrine, Fluvial terrace, Wadi bed, Paleosol, Active floodplain, and Residual hilltop.
+Formation	Parent geological formation from which the clay deposit derives. Nine formations are represented: Lisan Fm, Samra Fm, Judea Group, Mt Scopus Group, Avedat Group, Kurkar Fm, Basalt Fm, Lower Cretaceous Shale, and Ze'elim Fm, each imparting distinct geochemical fingerprints onto derived clays.
+Latitude	Geographic latitude of the sampling location in decimal degrees (WGS84 datum). Values include minor stochastic perturbation (σ = 0.005°) to simulate intra-site spatial variability among individual sampling points.
+Longitude	Geographic longitude of the sampling location in decimal degrees (WGS84 datum), with the same stochastic perturbation applied as for latitude.
+SiO2_wt%	Silicon dioxide concentration expressed as weight percent of the total oxide analysis. SiO2 ranges from approximately 15% (Lisan marls) to 65% (coastal hamra), reflecting the balance between detrital quartz/feldspar and authigenic clay minerals. Elevated SiO2 typically indicates quartz-rich sandy substrates or mature weathering profiles.
+Al2O3_wt%	Aluminium oxide concentration (wt%). Al2O3 is the primary indicator of clay mineral abundance and weathering intensity, with terra rossa soils exhibiting the highest values (10–25%) due to extensive leaching of mobile cations and residual enrichment of aluminium in kaolinite and gibbsite.
+Fe2O3_wt%	Total iron as ferric oxide (wt%). Fe2O3 is diagnostic for distinguishing basaltic-derived clays (8–15%) from calcareous sedimentary clays (2–6%). Iron occurs as hematite, goethite, and structural substitution in clay lattices, conferring the characteristic red coloration of terra rossa and hamra soils.
+MgO_wt%	Magnesium oxide concentration (wt%). MgO is elevated in basaltic soils (3–8%) and alluvial clays with dolomitic contributions, while being low in mature terra rossa (0.5–3%) where magnesium has been leached during pedogenesis.
+CaO_wt%	Calcium oxide concentration (wt%). CaO is the most powerful single discriminator between alluvial and residual deposits. Lisan marls exhibit extreme CaO enrichment (25–45%) reflecting primary carbonate precipitation, alluvial clays show moderate values (5–25%) from inherited calcite, while terra rossa clays are strongly decalcified (0.5–15%).
+Na2O_wt%	Sodium oxide concentration (wt%). Na2O is generally low across all deposit types (0.1–2.0%), with slightly elevated values in basaltic soils reflecting the sodic character of alkali olivine basalt parent material and in alluvial clays influenced by evaporitic contributions.
+K2O_wt%	Potassium oxide concentration (wt%). K2O reflects illite abundance and feldspar content, ranging from 0.5–3.0% across deposit types. Elevated K2O in terra rossa and alluvial clays correlates with illite preservation in the clay fraction.
+TiO2_wt%	Titanium dioxide concentration (wt%). TiO2 is a key provenance indicator due to the immobility of titanium during weathering. Basaltic soils exhibit the highest TiO2 (1.5–3.5%) reflecting the titaniferous character of the basaltic parent rock, while Lisan marls show the lowest values (0.2–0.8%).
+P2O5_wt%	Phosphorus pentoxide concentration (wt%). P2O5 is influenced by both geological (apatite content) and anthropogenic (bone, ash, organic waste) inputs. Basaltic soils show the highest geological P2O5 (0.2–1.0%), while elevated values in archaeological contexts may indicate contamination from habitation deposits.
+MnO_wt%	Manganese oxide concentration (wt%). MnO is a minor but diagnostically useful component, with basaltic soils showing the highest concentrations (0.15–0.30%) reflecting the manganese-enriched character of basaltic parent material. Redox-sensitive behaviour makes MnO a secondary indicator of drainage conditions.
+LOI_wt%	Loss on ignition at 1000°C expressed as weight percent. LOI encompasses combined water (from clay mineral dehydroxylation), organic matter, and CO2 from carbonate decomposition. Lisan marls exhibit the highest LOI (20–35%) due to their high carbonate content, while basaltic soils show the lowest (5–12%).
  
-3. Sheet 2: Short_Irradiation_Raw
-Purpose and Scientific Context
-This sheet records the raw gamma-ray spectroscopic count data obtained during the short-irradiation sequence of the INAA protocol. In the standard MURR procedure, samples are subjected to a 5-second irradiation at a thermal neutron flux of approximately 8 x 10^13 n cm^-2 s^-1, followed by a 25-minute decay period and a 720-second live-time count on a high-purity germanium (HPGe) detector. The raw counts for nine short-lived activation products are recorded alongside essential spectroscopic metadata including dead time, live time, detector identification, and geometric positioning parameters necessary for quantitative concentration calculations.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key linking to the Sample_Inventory sheet.
-Irradiation_Batch: Batch identifier for the short irradiation run, formatted as SIR-XXX. Samples irradiated in the same batch experience identical neutron flux conditions, enabling batch-level quality control.
-Irradiation_Duration_s: Duration of the short irradiation in seconds (standard: 5 seconds at MURR). This parameter directly affects the induced radioactivity and resultant count rates.
-Neutron_Flux_n_cm2_s: Thermal neutron flux in neutrons per square centimetre per second at the irradiation position, expressed in scientific notation. Typical MURR values range from 7.5 x 10^13 to 8.5 x 10^13.
-Decay_Time_s: Time elapsed between end of irradiation and beginning of gamma-ray counting, in seconds. Standard MURR protocol specifies approximately 1500 seconds (25 minutes) to allow very short-lived activities to decay.
-Count_Duration_s: Preset counting time for gamma-ray spectral acquisition in seconds (standard: 720 seconds for short irradiation products).
-Na24_Counts: Integrated net peak area counts for the 1369 keV gamma-ray line of Na-24 (half-life 14.96 hours), used for sodium determination.
-Al28_Counts: Integrated net peak area counts for the 1779 keV gamma-ray line of Al-28 (half-life 2.24 minutes), used for aluminium determination.
-K42_Counts: Integrated net peak area counts for the 1525 keV gamma-ray line of K-42 (half-life 12.36 hours), used for potassium determination.
-Ca49_Counts: Integrated net peak area counts for the 3084 keV gamma-ray line of Ca-49 (half-life 8.72 minutes), used for calcium determination.
-Ti51_Counts: Integrated net peak area counts for the 320 keV gamma-ray line of Ti-51 (half-life 5.76 minutes), used for titanium determination.
-V52_Counts: Integrated net peak area counts for the 1434 keV gamma-ray line of V-52 (half-life 3.74 minutes), used for vanadium determination.
-Mn56_Counts: Integrated net peak area counts for the 847 keV gamma-ray line of Mn-56 (half-life 2.58 hours), used for manganese determination.
-Ba139_Counts: Integrated net peak area counts for the 166 keV gamma-ray line of Ba-139 (half-life 83.06 minutes), used for barium determination.
-Dy165_Counts: Integrated net peak area counts for the 95 keV gamma-ray line of Dy-165 (half-life 2.33 hours), used for dysprosium determination.
-Dead_Time_Pct: Percentage of the counting interval during which the detector electronics were unable to process incoming events due to pulse pile-up. Values exceeding 10% indicate potential spectral distortion.
-Live_Time_s: Actual live (active) counting time in seconds, equal to the preset count duration minus dead-time losses. Used in the denominator of count-rate calculations.
-Sample_Mass_mg: Mass of the powdered sample aliquot in milligrams, typically 140-220 mg, measured to 0.1 mg precision on an analytical microbalance.
-Vial_Type: Type of irradiation container used: Polyethylene for short irradiation, high-purity quartz for long irradiation. Material purity is critical to minimise blank contributions.
-Detector_ID: Unique identifier of the HPGe detector used for gamma-ray spectroscopy (e.g., HPGe-1 through HPGe-4), enabling detector-specific efficiency calibration corrections.
-Geometry_Position: Shelf position (1-5) relative to the detector face during counting. Position 1 is closest to the detector, providing highest count rates but greatest geometric sensitivity. Positions 4-5 reduce dead time for highly active samples.
-Spectrum_File_ID: Filename of the raw gamma-ray spectrum data file stored in the laboratory information management system, formatted as SXXXXX_short.spc.
-Background_Subtracted: Binary flag indicating whether ambient background radiation has been subtracted from the gross peak areas to yield net counts (Yes/No).
-QC_Flag: Quality control status flag: Pass indicates all spectral parameters within acceptable limits; Flag indicates one or more anomalies requiring review (elevated dead time, low count rates, spectral artifacts).
-Notes: Free-text field for analyst observations regarding sample condition, measurement anomalies, or procedural deviations (e.g., slight moisture noted, irregular geometry, replicate sample).
+4. Sheet 2: Trace Element Analysis
+4.1 Sheet Overview
+This sheet presents trace element concentrations measured in parts per million (ppm) for 5,000 clay samples. Trace elements provide substantially higher discriminatory power than major oxides for distinguishing clay source provenance because many trace elements are geochemically immobile during weathering and thus preserve the signature of the parent lithology. The dataset incorporates 15 trace elements routinely measured in ceramic provenance studies, with distributions calibrated to published Neutron Activation Analysis (NAA), X-Ray Fluorescence (XRF), and Inductively Coupled Plasma Mass Spectrometry (ICP-MS) data from the region. The chromium-nickel-vanadium-cobalt quartet (Cr, Ni, V, Co) constitutes the most powerful discriminator for basaltic versus non-basaltic clay sources, while the rubidium-barium-strontium system discriminates among sedimentary clay types.
+Sheet Name in Workbook: Trace_Element_Anal
+Total Records: 5,000 rows
+Total Columns: 22
+
+4.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format TRC-XXXXX for the Trace Element dataset.
+Site_Name	Full archaeological site name corresponding to one of the 31 Neolithic sites in the study area.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin within the Southern Levant.
+Clay_Type	Geochemical clay deposit classification (Alluvial, Residual_Terra_Rossa, Basaltic_Soil, Coastal_Hamra, Lisan_Marl, Rendzina).
+Formation	Parent geological formation.
+Analytical_Method	Analytical technique employed for trace element determination. Options include INAA (Instrumental Neutron Activation Analysis), WD-XRF (Wavelength Dispersive X-Ray Fluorescence), ICP-MS (Inductively Coupled Plasma Mass Spectrometry), ICP-OES (Inductively Coupled Plasma Optical Emission Spectrometry), pXRF (portable XRF), and LA-ICP-MS (Laser Ablation ICP-MS).
+Ba_ppm	Barium concentration in parts per million. Ba substitutes for potassium in feldspars and micas, with values ranging from 150 to 500 ppm across deposit types. Ba/Sr ratios are used as weathering intensity proxies.
+Sr_ppm	Strontium concentration (ppm). Sr substitutes for calcium in carbonate and plagioclase, producing elevated values (200–700 ppm) in calcareous clays (Lisan marl, rendzina) and lower values in decalcified residual soils.
+Zr_ppm	Zirconium concentration (ppm). Zr resides almost exclusively in detrital zircon, making it a robust provenance tracer unaffected by weathering or diagenesis. Values range from 100 to 350 ppm.
+Rb_ppm	Rubidium concentration (ppm). Rb substitutes for potassium in illite and K-feldspar. Residual terra rossa clays exhibit the highest Rb (50–120 ppm) reflecting clay mineral enrichment, while basaltic soils show the lowest (10–40 ppm).
+Cr_ppm	Chromium concentration (ppm). Cr is the single most diagnostic element for identifying basaltic clay provenance, with values of 150–600 ppm in basaltic soils versus 30–150 ppm in all other deposit types. Cr resides in chromite, pyroxene, and Cr-spinel.
+Ni_ppm	Nickel concentration (ppm). Ni co-varies strongly with Cr in basaltic provenance contexts (80–350 ppm in basaltic soils), residing in olivine, pyroxene, and secondary Ni-bearing smectites.
+V_ppm	Vanadium concentration (ppm). V is enriched in mafic minerals and magnetite, producing elevated values (150–350 ppm) in basaltic soils. V co-varies with Fe2O3 and TiO2 across all deposit types.
+Co_ppm	Cobalt concentration (ppm). Co completes the mafic element quartet (Cr-Ni-V-Co), with basaltic soils showing 30–70 ppm versus 6–25 ppm in non-basaltic clays.
+Cu_ppm	Copper concentration (ppm). Cu ranges from 10–120 ppm, with highest values in basaltic soils. Anomalously elevated Cu may indicate anthropogenic contamination from metallurgical activities in later periods.
+Zn_ppm	Zinc concentration (ppm). Zn ranges from 30–180 ppm and is moderately elevated in basaltic soils. Like Cu, anomalous Zn enrichment may signal post-depositional anthropogenic input.
+Pb_ppm	Lead concentration (ppm). Pb is typically low (5–40 ppm) in Neolithic contexts, with slightly higher values in felsic-derived clays (terra rossa, rendzina) due to the lithophile behaviour of Pb in granitic/sedimentary systems.
+Y_ppm	Yttrium concentration (ppm). Y behaves as a pseudo-heavy rare earth element (HREE) and ranges from 12–35 ppm. Y is useful in provenance bivariate plots such as Y/Nb versus Zr/Nb.
+Nb_ppm	Niobium concentration (ppm). Nb is strongly enriched in basaltic soils (15–45 ppm) relative to sedimentary clays (5–18 ppm), reflecting the incompatible-element-enriched character of alkali basalt.
+Th_ppm	Thorium concentration (ppm). Th is enriched in felsic/sedimentary-derived clays (8–16 ppm in terra rossa) relative to mafic sources (3–8 ppm in basaltic soils). The Th/Sc ratio is a standard upper continental crust (UCC) normalization proxy.
+U_ppm	Uranium concentration (ppm). U ranges from 1–6 ppm and is slightly elevated in calcareous deposits (rendzina, Lisan) due to uranium co-precipitation with carbonate phases.
  
-4. Sheet 3: Short_Irrad_Conc
-Purpose and Scientific Context
-This sheet presents the elemental concentrations derived from the short irradiation gamma-ray spectra for nine elements (Na, Al, K, Ca, Ti, V, Mn, Ba, Dy). Concentrations are calculated from raw count data using the comparator method against certified reference materials, with corrections applied for neutron flux variations, decay during counting, detector efficiency, gamma-ray self-absorption, and sample mass. Each concentration value is accompanied by its associated analytical uncertainty, propagated from counting statistics, calibration uncertainties, and mass measurement errors.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key linking to the Sample_Inventory sheet.
-Na_pct / Na_Uncertainty_pct: Sodium concentration and associated 1-sigma uncertainty, both expressed as weight percent (wt%). Typical range for Levantine ceramics: 0.3-2.0%. Na is a large-ion lithophile element susceptible to post-depositional leaching.
-Al_pct / Al_Uncertainty_pct: Aluminium concentration and uncertainty in wt%. Range: 5-10%. Al reflects the clay mineral content and is relatively immobile during burial.
-K_pct / K_Uncertainty_pct: Potassium concentration and uncertainty in wt%. Range: 1-4%. K is associated with illite and feldspar phases; subject to moderate post-depositional mobility.
-Ca_pct / Ca_Uncertainty_pct: Calcium concentration and uncertainty in wt%. Range: 1-20%. Highly variable due to both primary carbonate content in calcareous clays and secondary calcite precipitation during burial.
-Ti_pct / Ti_Uncertainty_pct: Titanium concentration and uncertainty in wt%. Range: 0.3-0.6%. Ti resides in detrital heavy minerals (rutile, ilmenite) and is highly immobile, making it a reliable provenance indicator.
-V_ppm / V_Uncertainty_ppm: Vanadium concentration and uncertainty in parts per million. Range: 50-200 ppm. V substitutes in clay minerals and iron oxides.
-Mn_ppm / Mn_Uncertainty_ppm: Manganese concentration and uncertainty in ppm. Range: 500-1500 ppm. Subject to biogenic enrichment through manganese oxide precipitation in burial environments.
-Ba_ppm / Ba_Uncertainty_ppm: Barium concentration and uncertainty in ppm. Range: 200-700 ppm. Ba substitutes for K in feldspar and can be enriched by groundwater interaction.
-Dy_ppm / Dy_Uncertainty_ppm: Dysprosium concentration and uncertainty in ppm. Range: 3-6 ppm. Dy is a heavy rare earth element, highly immobile and valuable for provenance discrimination.
-Normalization_Factor: Multiplicative correction factor applied to account for neutron flux variation within the irradiation batch, calculated from co-irradiated flux monitors. Values near 1.00 indicate uniform flux exposure.
-Batch_ID: Short irradiation batch identifier linking to the irradiation parameters in Sheet 2.
-Standard_Used: Certified reference material used as the primary calibration standard for concentration calculations (typically SRM-1633b coal fly ash from NIST).
-QC_Status: Quality control assessment for the concentration determinations: Pass or Flag.
+5. Sheet 3: Rare Earth Element (REE) Profiles
+5.1 Sheet Overview
+This sheet provides complete rare earth element profiles for all 14 lanthanides (La through Lu) plus derived REE ratios and anomaly indices for 5,000 samples. REE patterns are among the most powerful provenance discriminators in geochemistry because the entire lanthanide series behaves coherently during geological processes, with systematic fractionation controlled by ionic radius. The chondrite-normalized REE patterns of Southern Levantine clays exhibit characteristic light-REE (LREE) enrichment, negative europium anomalies (reflecting feldspar fractionation in source rocks), and variable LREE/HREE ratios that distinguish basaltic (lower, flatter patterns) from felsic/sedimentary (steeper, more LREE-enriched patterns) provenance. Total REE abundances range from approximately 100 to 250 ppm.
+Sheet Name in Workbook: REE_Profiles
+Total Records: 5,000 rows
+Total Columns: 23
+
+5.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format REE-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Clay_Type	Geochemical clay deposit classification.
+Region	Physiographic region of origin.
+Formation	Parent geological formation.
+La_ppm	Lanthanum concentration (ppm). La is the lightest and most abundant REE, ranging from approximately 15–65 ppm. La anchors the LREE end of the chondrite-normalized pattern.
+Ce_ppm	Cerium concentration (ppm). Ce is typically the most abundant REE (30–130 ppm) and may exhibit positive or negative Ce anomalies under oxidizing conditions due to Ce³⁺/Ce⁴⁺ redox cycling.
+Pr_ppm	Praseodymium concentration (ppm). Pr ranges from approximately 4–16 ppm and follows the smooth LREE trend between Ce and Nd.
+Nd_ppm	Neodymium concentration (ppm). Nd ranges from approximately 15–60 ppm and is widely used in isotopic provenance studies (Nd isotopes) when available.
+Sm_ppm	Samarium concentration (ppm). Sm marks the transition from LREE to middle REE (MREE), ranging from approximately 3–12 ppm. Sm is essential for calculating the Eu anomaly (Eu/Eu*).
+Eu_ppm	Europium concentration (ppm). Eu ranges from approximately 0.6–2.3 ppm and characteristically displays a negative anomaly (Eu depletion relative to Sm and Gd) in clays derived from evolved crustal sources. Basaltic clays show a weaker negative anomaly.
+Gd_ppm	Gadolinium concentration (ppm). Gd is the first HREE-group element, ranging from approximately 3–10 ppm. Gd is required for the Eu anomaly calculation and the Gd/Yb fractionation ratio.
+Tb_ppm	Terbium concentration (ppm). Tb ranges from approximately 0.4–1.3 ppm and follows the smooth HREE declination trend.
+Dy_ppm	Dysprosium concentration (ppm). Dy ranges from approximately 2.5–8 ppm.
+Ho_ppm	Holmium concentration (ppm). Ho ranges from approximately 0.5–1.5 ppm.
+Er_ppm	Erbium concentration (ppm). Er ranges from approximately 1.5–4.5 ppm.
+Tm_ppm	Thulium concentration (ppm). Tm ranges from approximately 0.2–0.7 ppm and is the least abundant REE measured in routine analyses.
+Yb_ppm	Ytterbium concentration (ppm). Yb ranges from approximately 1.5–4.0 ppm and anchors the HREE end of the chondrite-normalized pattern. The La/Yb ratio (chondrite-normalized) is a fundamental fractionation metric.
+Lu_ppm	Lutetium concentration (ppm). Lu is the heaviest and least abundant REE, ranging from approximately 0.2–0.6 ppm.
+Eu_Eu_star	Europium anomaly calculated as Eu/Eu* = Eu_CN / sqrt(Sm_CN × Gd_CN), where CN denotes chondrite-normalized values. Values less than 1.0 indicate a negative Eu anomaly (typical of felsic/crustal sources), while values near 1.0 suggest mafic/basaltic sources. Expected range: 0.40–1.10.
+LaN_YbN	Chondrite-normalized La/Yb ratio, a measure of LREE/HREE fractionation. Higher values (7–12) indicate steeper REE patterns typical of felsic/sedimentary-derived clays, while lower values (5–8) indicate flatter patterns characteristic of basaltic sources.
+LREE_HREE	Ratio of total light rare earth elements (La+Ce+Pr+Nd) to total heavy rare earth elements (Er+Tm+Yb+Lu). This ratio provides a bulk measure of REE fractionation, with higher values indicating greater LREE enrichment.
+Total_REE_ppm	Sum of all 14 measured REE concentrations (La through Lu) expressed in parts per million. Total REE abundance is a first-order indicator of clay mineral concentration and source rock composition, typically ranging from 100–250 ppm.
  
-5. Sheet 4: Mid_Count_Conc
-Purpose and Scientific Context
-This sheet contains elemental concentrations determined from the mid-count gamma-ray spectra, acquired 7-8 days after the 24-hour long irradiation. The mid-count targets seven elements with activation products having half-lives in the range of 1-11 days (As, La, Sm, U, Nd, Yb, Lu), which includes several critically important rare earth elements. The REE (La, Sm, Nd, Yb, Lu) are among the most reliable provenance discriminators due to their geochemical immobility and systematic inter-element correlations governed by ionic radius.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-As_ppm / As_Unc_ppm: Arsenic concentration and uncertainty in ppm. Range: 5-20 ppm. As is a chalcophile element; concentrations may be affected by volatilisation during high-temperature firing and post-depositional contamination.
-La_ppm / La_Unc_ppm: Lanthanum concentration and uncertainty in ppm. Range: 20-45 ppm. La is a light rare earth element, highly immobile, with analytical precision typically 1.5-3% RSD. La is one of the most reliable provenance discriminators.
-Sm_ppm / Sm_Unc_ppm: Samarium concentration and uncertainty in ppm. Range: 4-8 ppm. Sm is a middle REE with excellent analytical precision (2% RSD) and high discriminating power.
-U_ppm / U_Unc_ppm: Uranium concentration and uncertainty in ppm. Range: 2-5 ppm. U determined via the 228 keV line of Np-239, the daughter product of U-239. Subject to moderate post-depositional mobility in oxidising groundwater environments.
-Nd_ppm / Nd_Unc_ppm: Neodymium concentration and uncertainty in ppm. Range: 20-40 ppm. Nd is a light REE measured via the 91 keV line of Nd-147 (half-life 10.98 days).
-Yb_ppm / Yb_Unc_ppm: Ytterbium concentration and uncertainty in ppm. Range: 2-4 ppm. Yb is a heavy REE, providing the HREE complement to La and Ce for calculating REE fractionation ratios (La/Yb).
-Lu_ppm / Lu_Unc_ppm: Lutetium concentration and uncertainty in ppm. Range: 0.3-0.6 ppm. Lu is the heaviest naturally occurring REE, anchoring the heavy end of chondrite-normalised REE patterns.
-Decay_Days: Number of days elapsed between end of long irradiation and commencement of mid-count spectral acquisition. Standard: 7-8.5 days.
-Count_Duration_s: Preset counting time for mid-count spectral acquisition in seconds (standard: 2000 seconds).
-Irrad_Batch: Long irradiation batch identifier, formatted as LIR-XXX.
-Detector_ID: HPGe detector identifier used for the mid-count measurement.
-Geometry: Shelf position during mid-count measurement.
-Spectrum_File: Filename of the mid-count gamma-ray spectrum stored as SXXXXX_mid.spc.
-Standard_Ref: Reference standard used for calibration.
-QC_Status: Quality control flag for mid-count determinations.
+6. Sheet 4: Clay Mineralogy and X-Ray Diffraction (XRD) Data
+6.1 Sheet Overview
+This sheet records the mineralogical composition of 5,000 clay samples as determined by X-ray diffraction analysis. Clay mineral assemblages in the Southern Levant follow systematic patterns governed by parent lithology, drainage conditions, and climate. Well-drained residual soils (terra rossa) undergo progressive kaolinitization, yielding high kaolinite percentages (20–60%), while poorly drained alluvial settings and basaltic soils preserve smectite as the dominant clay mineral (50–90% of the clay fraction). The sheet includes both clay fraction minerals (kaolinite, illite, smectite/interstratified illite-smectite, chlorite, palygorskite) and non-clay minerals (quartz, feldspar, calcite, dolomite, hematite, goethite), along with XRD diagnostic parameters such as crystallinity indices and d-spacing values.
+Sheet Name in Workbook: Clay_Mineralogy_XRD
+Total Records: 5,000 rows
+Total Columns: 20
+
+6.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format XRD-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Clay_Type	Geochemical clay deposit classification.
+Formation	Parent geological formation.
+Depth_cm	Sampling depth below the modern ground surface in centimetres. Depth influences clay mineral assemblages through profile weathering gradients, with surface horizons typically showing more advanced weathering (higher kaolinite) than subsurface horizons.
+Kaolinite_%	Percentage of kaolinite in the clay mineral fraction. Kaolinite is the product of advanced silicate weathering under well-drained acidic conditions. Terra rossa soils exhibit the highest kaolinite content (20–60%), while alluvial and basaltic soils show lower values (10–25%).
+Illite_%	Percentage of illite in the clay mineral fraction. Illite is a detrital mineral inherited from parent sedimentary rocks and is most abundant in terra rossa (15–30%) and alluvial clays (5–15%) derived from Cretaceous limestone/marl substrates.
+Smectite_IS_%	Combined percentage of smectite and interstratified illite-smectite (IS) in the clay fraction. This is the dominant clay mineral in most Southern Levantine soils, ranging from 15–40% in evolved terra rossa to greater than 60% in basaltic soils and alluvial deposits. Random (R0) interstratification is most common.
+Chlorite_%	Percentage of chlorite in the clay fraction. Chlorite is a minor component (trace to 5%) across all deposit types, predominantly of detrital origin. Chlorite is distinguished from kaolinite by its survival at 550°C during heating treatments.
+Palygorskite_%	Percentage of palygorskite (attapulgite) in the clay fraction. Palygorskite is an authigenic fibrous clay mineral forming under arid, alkaline, Mg-rich conditions. It is characteristic of rendzina soils (5–15%) and Lisan/loess deposits (3–8%), while being absent from terra rossa and basaltic soils.
+Quartz_%	Percentage of quartz in the bulk mineral assemblage. Quartz is the dominant non-clay mineral, ranging from 10–20% in Lisan marls to 50–80% in coastal hamra soils, reflecting the relative proportion of detrital versus chemical sedimentary components.
+Feldspar_%	Percentage of feldspar (combined plagioclase and K-feldspar) in the bulk assemblage. Feldspar ranges from 3–12% and is slightly elevated in alluvial and basaltic soils.
+Calcite_%	Percentage of calcite in the bulk assemblage. Calcite is a primary discriminator, ranging from near zero in decalcified terra rossa to 25–50% in Lisan marls.
+Dolomite_%	Percentage of dolomite in the bulk assemblage. Dolomite is present at 0–10% and is most abundant in alluvial and Lisan deposits influenced by dolomitic parent rock.
+Hematite_%	Percentage of hematite in the bulk assemblage. Hematite is the iron oxide responsible for the red pigmentation of terra rossa soils (2–6%) and is less abundant in reduced or calcareous environments.
+Goethite_%	Percentage of goethite in the bulk assemblage. Goethite is a hydrated iron oxyhydroxide present at 0–2%, more common in periodically waterlogged soils.
+Crystallinity_Index	XRD-derived crystallinity index for the dominant clay mineral, calculated from peak width at half-maximum (FWHM). Values range from 0.30 (poorly crystalline) to 0.95 (well crystalline). Higher crystallinity indicates better-ordered clay structures.
+d001_Smectite_A	Basal d-spacing of smectite measured under air-dried (AD) conditions in Angstroms. Expected values are 14–15 Å for Ca-smectite and 12–13 Å for Na-smectite.
+EG_d001_A	Basal d-spacing of smectite after ethylene glycol (EG) solvation in Angstroms. Expected value is approximately 17 Å for expandable smectite. Failure to expand fully may indicate mixed-layer (illite-smectite) ordering.
  
-6. Sheet 5: Long_Count_Conc
-Purpose and Scientific Context
-This sheet presents concentration data for seventeen elements determined from the long-count gamma-ray spectra, acquired 4-5 weeks after the 24-hour irradiation with a 10,800-second (3-hour) counting time. These elements include the backbone of ceramic provenance analysis: Sc, Cr, Fe, Co, the critical REE pair Ce-Eu, and the high-field-strength elements Hf, Ta, and Th. The extended decay period and long counting time provide exceptional sensitivity for long-lived activation products, achieving analytical precision of 1-4% RSD for most elements. Each concentration is paired with its propagated uncertainty.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Sc_ppm / Sc_ppm_Unc: Scandium concentration and uncertainty in ppm. Range: 10-25 ppm. Sc (via Sc-46, half-life 83.79 days, 889 keV) is one of the most precisely measured and provenance-diagnostic elements in ceramic INAA, with typical RSD of 1.5%.
-Cr_ppm / Cr_ppm_Unc: Chromium concentration and uncertainty in ppm. Range: 50-200 ppm. Cr is associated with chromite and clay minerals. Elevated Cr distinguishes Cypriot (ophiolite-influenced) clays from Argolid sources.
-Fe_pct / Fe_pct_Unc: Iron concentration and uncertainty in wt%. Range: 3-8%. Fe is a major element reflecting clay mineralogy and iron oxide content. Calcareous Levantine clays are characteristically iron-poor (2-3.5%) relative to Aegean clays (5-6%).
-Co_ppm / Co_ppm_Unc: Cobalt concentration and uncertainty in ppm. Range: 10-30 ppm. Co is geochemically coherent with Fe and provides useful discrimination between compositional groups.
-Ni_ppm / Ni_ppm_Unc: Nickel concentration and uncertainty in ppm. Range: 90-550 ppm. Ni is associated with mafic/ultramafic geological sources and shows elevated concentrations in Cypriot ceramics from ophiolite-derived clay sources.
-Zn_ppm / Zn_ppm_Unc: Zinc concentration and uncertainty in ppm. Range: 80-130 ppm. Zn is a moderately useful provenance discriminator with RSD typically 4-8%.
-Rb_ppm / Rb_ppm_Unc: Rubidium concentration and uncertainty in ppm. Range: 50-170 ppm. Rb is a large-ion lithophile element geochemically coherent with K; subject to post-depositional leaching similar to Na and Cs.
-Sr_ppm / Sr_ppm_Unc: Strontium concentration and uncertainty in ppm. Range: 100-500 ppm. Sr substitutes for Ca in carbonates and plagioclase; its concentration correlates with Ca content and is influenced by temper additions and post-depositional alteration.
-Zr_ppm / Zr_ppm_Unc: Zirconium concentration and uncertainty in ppm. Range: 50-230 ppm. Zr resides in detrital zircon and is highly immobile, making it a reliable provenance indicator despite moderate analytical precision.
-Sb_ppm / Sb_ppm_Unc: Antimony concentration and uncertainty in ppm. Range: 0.5-2.5 ppm. Sb is a volatile chalcophile element; some specimens may show firing-related depletion.
-Cs_ppm / Cs_ppm_Unc: Caesium concentration and uncertainty in ppm. Range: 2-15 ppm. Cs is highly susceptible to post-depositional leaching and is frequently excluded from provenance analysis in waterlogged or coastal burial environments.
-Ce_ppm / Ce_ppm_Unc: Cerium concentration and uncertainty in ppm. Range: 30-100 ppm. Ce is a light REE with excellent analytical precision (2% RSD); the Ce/La ratio may reveal Ce anomalies related to redox conditions.
-Eu_ppm / Eu_ppm_Unc: Europium concentration and uncertainty in ppm. Range: 0.8-1.4 ppm. Eu is a middle REE measured via the long-lived Eu-152 (half-life 13.54 years); the Eu anomaly (Eu/Eu*) reflects feldspar fractionation.
-Tb_ppm / Tb_ppm_Unc: Terbium concentration and uncertainty in ppm. Range: 0.5-1.0 ppm. Tb is a middle-to-heavy REE providing additional discrimination in the REE pattern.
-Hf_ppm / Hf_ppm_Unc: Hafnium concentration and uncertainty in ppm. Range: 2.5-5.0 ppm. Hf is geochemically coherent with Zr (both HFSE) and resides in detrital zircon; highly immobile and diagnostic.
-Ta_ppm / Ta_ppm_Unc: Tantalum concentration and uncertainty in ppm. Range: 0.4-1.3 ppm. Ta is a high-field-strength element associated with resistate heavy minerals; highly immobile.
-Th_ppm / Th_ppm_Unc: Thorium concentration and uncertainty in ppm. Range: 5-20 ppm. Th is an actinide element with exceptional provenance utility (RSD 1.5-3%), residing in monazite and other resistate phases. The Th/Sc ratio effectively discriminates local Levantine (0.4-0.6) from Aegean (0.5-0.55) productions.
-Decay_Weeks: Weeks elapsed between end of long irradiation and commencement of long-count. Standard: 4-5.5 weeks.
-Count_Duration_s: Counting time for long-count spectra (standard: 10,800 seconds = 3 hours).
-Batch: Long irradiation batch identifier.
-QC: Quality control flag for long-count determinations.
+7. Sheet 5: Petrographic Analysis of Ceramic Thin Sections
+7.1 Sheet Overview
+This sheet records petrographic observations from optical microscopy of 5,000 ceramic thin sections. Petrography is the primary method for identifying temper type, fabric group, and manufacturing technology in archaeological ceramics. Neolithic Southern Levantine pottery is characterised by low firing temperatures (predominantly 500–750°C), open-pit/bonfire firing, and the use of locally available tempering materials. Eight fabric groups are defined based on the dominant temper type and matrix characteristics, following the classification framework established by Goren and colleagues for Levantine ceramic petrography. The sheet captures both compositional variables (temper type, matrix/void proportions) and textural parameters (grain size, sorting, roundness, optical activity) essential for fabric classification.
+Sheet Name in Workbook: Petrographic_Anal
+Total Records: 5,000 rows
+Total Columns: 19
+
+7.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format PTR-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Period	Archaeological period code.
+Vessel_Type	Morphological vessel form classification. Categories include Bowl, Jar, Cooking Pot, Storage Vessel, Jug, Platter, Krater, Hole-Mouth Jar, Miniature Vessel, and Fenestrated Bowl, reflecting the standard typological repertoire of Neolithic Southern Levantine ceramics.
+Fabric_Group	Petrographic fabric group assignment based on temper mineralogy and matrix characteristics. Eight groups are defined: FG-1 (Calcareous Fine), FG-2 (Basalt Tempered), FG-3 (Sandy Coarse), FG-4 (Organic Tempered), FG-5 (Grog Tempered), FG-6 (Mixed Alluvial), FG-7 (Terra Rossa Fine), and FG-8 (Lisan Marl).
+Primary_Temper	Dominant non-plastic inclusion type identified in the thin section. Categories include Calcite, Basalt, Straw/Organic, Sand/Quartz, and Grog, representing the five most common tempering materials in Neolithic pottery of the region.
+Secondary_Temper	Subordinate non-plastic inclusion type, if present. May include any of the primary temper categories plus Shell, Flint/Chert, or None if only a single temper type is identified.
+Temper_Vol_%	Volume percentage of non-plastic inclusions (temper) estimated by point-counting in the thin section. Values range from 5–40%, with most Neolithic sherds falling between 10–25%.
+Matrix_Vol_%	Volume percentage of the fine-grained clay matrix estimated by point-counting. Values range from 40–80%, inversely correlated with temper and void proportions.
+Void_Vol_%	Volume percentage of voids (porosity) estimated by point-counting. Values range from 5–35%, with higher porosity characteristic of low-fired, organic-tempered wares where straw burnout creates secondary voids.
+Max_Grain_mm	Maximum grain size of non-plastic inclusions measured in millimetres. Values range from 0.5–5.0 mm, with basalt-tempered and calcite-tempered wares exhibiting the coarsest inclusions.
+Mean_Grain_mm	Mean grain size of non-plastic inclusions in millimetres, calculated from the measured grain size distribution. Values range from 0.1–2.0 mm.
+Sorting	Qualitative assessment of the uniformity of temper grain sizes: Well sorted, Moderately sorted, Poorly sorted, or Very poorly sorted. Well-sorted temper suggests intentional crushing and sieving, while poor sorting may indicate natural inclusions.
+Roundness	Grain shape classification using the Powers (1953) scale: Angular, Sub-angular, Sub-rounded, Rounded, or Well-rounded. Angular grains indicate intentional crushing of temper, while rounded grains suggest natural alluvial transport.
+Optical_Activity	Degree of birefringence of the clay matrix under crossed polars: Optically active (low firing, clay structure intact), Slightly active (intermediate firing), or Optically inactive (high firing, clay structure destroyed). This parameter is a primary indicator of firing temperature in the thin section.
+Est_Firing_Temp_C	Estimated original firing temperature in degrees Celsius, derived from the combination of optical activity, mineral transformation indicators, and matrix coloration. The majority of Neolithic samples cluster between 500–750°C.
+Firing_Atmosphere	Inferred firing atmosphere based on cross-section coloration and mineralogy: Oxidizing (uniform red/orange), Reducing (uniform grey/black), or Mixed/Incomplete (sandwich structure with dark core and oxidized margins).
+Birefringence	Qualitative assessment of matrix birefringence intensity: High (indicating firing below approximately 550°C with preserved clay crystal structure), Moderate (550–700°C with partial structural collapse), Low (700–850°C), or None (above approximately 850°C with complete amorphisation).
  
-7. Sheet 6: Combined_Conc_Matrix
-Purpose and Scientific Context
-This sheet consolidates all 33 elemental concentrations from the three counting sequences into a single comprehensive matrix, alongside derived geochemical ratios and indices. This unified dataset serves as the primary input for all multivariate statistical analyses. Each row corresponds to one specimen with its full chemical fingerprint, compositional group assignment, and kiln-load affiliation.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Compositional_Group: INAA compositional group assignment derived from multivariate statistical analysis.
-Kiln_Load_ID: Kiln-load affiliation for intra-kiln variability studies.
-[33 Element Columns]: Complete set of 33 elemental concentrations: Na%, Al%, K%, Ca%, Ti%, V ppm, Mn ppm, Ba ppm, Dy ppm, As ppm, La ppm, Sm ppm, U ppm, Nd ppm, Yb ppm, Lu ppm, Sc ppm, Cr ppm, Fe%, Co ppm, Ni ppm, Zn ppm, Rb ppm, Sr ppm, Zr ppm, Sb ppm, Cs ppm, Ce ppm, Eu ppm, Tb ppm, Hf ppm, Ta ppm, Th ppm.
-Total_REE_ppm: Sum of all determined rare earth elements (La+Ce+Nd+Sm+Eu+Tb+Dy+Yb+Lu) in ppm. Provides a bulk REE abundance metric.
-La_Yb_Ratio: Ratio of La to Yb concentrations, a standard measure of light-to-heavy REE fractionation. Higher values indicate LREE enrichment characteristic of specific clay mineralogies.
-Eu_Anomaly: Europium anomaly calculated as Eu/(Sm x Tb)^0.5, quantifying the deviation of Eu from the smooth REE pattern. Values less than 1.0 indicate negative Eu anomaly (feldspar removal from source).
-Th_Sc_Ratio: Ratio of Th to Sc, effective for discriminating felsic (high Th/Sc) from mafic (low Th/Sc) source contributions. Local Ugarit ceramics typically show Th/Sc of 0.4-0.6 versus Aegean values of 0.5-0.55.
-Cr_Sc_Ratio: Ratio of Cr to Sc, useful for identifying ophiolite-influenced clay sources. Elevated Cr/Sc (>15) is diagnostic of Cypriot productions derived from Troodos ophiolite-derived sediments.
+8. Sheet 6: Ceramic Sherd Chemistry
+8.1 Sheet Overview
+This sheet presents major oxide analyses of 5,000 ceramic sherds, as distinct from the raw clay analyses in Sheet 1. The critical difference is that ceramic compositions reflect the combined chemistry of the clay matrix diluted by the addition of non-plastic temper materials. Calcite temper addition increases CaO by 2–18%, basalt temper elevates Fe2O3 and TiO2, and organic temper reduces all oxide concentrations proportionally through dilution. A stochastic dilution factor (0.72–0.95) has been applied to simulate the tempering process, enabling researchers to model temper correction algorithms for provenance attribution.
+Sheet Name in Workbook: Ceramic_Sherd_Chem
+Total Records: 5,000 rows
+Total Columns: 19
+
+8.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format CSC-XXXXX for Ceramic Sherd Chemistry.
+Site_Name	Full archaeological site name.
+Site_Code	Three-letter site abbreviation.
+Period	Archaeological period code.
+Vessel_Type	Morphological vessel form classification.
+Temper_Type	Primary temper material identified in the sherd (Calcite, Basalt, Straw/Organic, Sand/Quartz, or Grog).
+Clay_Source_Type	Inferred clay source type based on geochemical composition after temper correction.
+SiO2_wt%	Silicon dioxide concentration in the ceramic sherd (wt%). Values are reduced relative to raw clay by the temper dilution factor and may be further modified by temper-specific contributions (e.g., elevated SiO2 from quartz sand temper).
+Al2O3_wt%	Aluminium oxide concentration in the ceramic sherd (wt%). Al2O3 is diluted proportionally by temper addition and is not significantly contributed by common temper types.
+Fe2O3_wt%	Iron oxide concentration in the ceramic sherd (wt%). Fe2O3 may be elevated above the dilution baseline in basalt-tempered sherds due to iron-rich basalt fragment contributions.
+MgO_wt%	Magnesium oxide in the ceramic sherd (wt%).
+CaO_wt%	Calcium oxide in the ceramic sherd (wt%). CaO is characteristically elevated (often by 2–18% above the clay baseline) in calcite-tempered sherds, which constitute the majority of Yarmukian ceramic assemblages. This temper-derived CaO must be corrected before provenance attribution.
+Na2O_wt%	Sodium oxide in the ceramic sherd (wt%).
+K2O_wt%	Potassium oxide in the ceramic sherd (wt%).
+TiO2_wt%	Titanium dioxide in the ceramic sherd (wt%). May be slightly elevated in basalt-tempered sherds.
+P2O5_wt%	Phosphorus pentoxide in the ceramic sherd (wt%).
+MnO_wt%	Manganese oxide in the ceramic sherd (wt%).
+LOI_wt%	Loss on ignition for the ceramic sherd (wt%). LOI is significantly reduced compared to raw clay because the firing process has already driven off much of the volatile content (water, organics, some carbonate CO2).
+Analytical_Method	Analytical technique used for the sherd analysis (INAA, WD-XRF, ICP-MS, ICP-OES, pXRF, or LA-ICP-MS).
  
-8. Sheet 7: Measurement_Uncertainties
-Purpose and Scientific Context
-This sheet provides the complete uncertainty budget for every elemental determination across all 5,000 specimens. Both absolute uncertainties (in the same units as the concentration) and relative uncertainties (as percentage of the measured value) are tabulated. Uncertainties are propagated from counting statistics (Poisson uncertainty on net peak areas), calibration curve uncertainties, mass measurement uncertainties, neutron flux monitor uncertainties, and detector efficiency uncertainties. These uncertainty values are essential inputs for Mahalanobis distance calculations and for proper weighting in multivariate statistical procedures.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-[33 Absolute Uncertainty Columns]: One column per element providing the absolute 1-sigma analytical uncertainty in the native concentration units (wt% for major elements, ppm for trace elements). Computed by quadrature propagation of all individual uncertainty components.
-[10 Relative Uncertainty Columns]: Relative uncertainties (as percentage of measured value) for the ten most provenance-critical elements: Na%, Ca%, Fe%, Sc, La, Ce, Eu, Th, Hf, and Cr. These relative values facilitate inter-element comparison of measurement quality.
+9. Sheet 7: Chemical Weathering Indices
+9.1 Sheet Overview
+This sheet compiles 5,000 records of chemical weathering indices and elemental ratios that serve as quantitative proxies for the degree of chemical alteration experienced by clay deposits. Weathering indices are the most robust geochemical discriminators between alluvial (transported, incompletely weathered, multi-source) and residual (in-situ, intensely weathered, single-source) clay deposits. The Chemical Index of Alteration (CIA) is the most widely applied metric, with values above 80 strongly indicating residual weathering profiles (terra rossa, basaltic soils) and values of 60–80 characterising alluvial sediments of mixed provenance. The dataset includes six weathering indices plus eight diagnostic elemental ratios.
+Sheet Name in Workbook: Weathering_Indices
+Total Records: 5,000 rows
+Total Columns: 20
+
+9.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format WTH-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Clay_Type	Geochemical clay deposit classification.
+Formation	Parent geological formation.
+Deposit_Type	Simplified deposit genesis classification: Residual (in-situ weathering product), Alluvial (transported by water), or Mixed (intermediate/ambiguous origin).
+CIA	Chemical Index of Alteration, calculated as 100 × [Al2O3 / (Al2O3 + CaO* + Na2O + K2O)], where CaO* represents calcium in silicate minerals only. CIA values range from approximately 55 (unweathered) to 100 (completely weathered). Residual terra rossa clays exhibit values of 75–95, while alluvial clays show values of 60–80.
+CIW	Chemical Index of Weathering, calculated as 100 × [Al2O3 / (Al2O3 + CaO* + Na2O)]. CIW excludes K2O to eliminate the influence of illite, making it more sensitive to feldspar weathering. Residual clays show values of 80–100.
+PIA	Plagioclase Index of Alteration, calculated as 100 × [(Al2O3 – K2O) / (Al2O3 + CaO* + Na2O – K2O)]. PIA specifically targets plagioclase weathering and ranges from approximately 50 (fresh) to 100 (completely weathered).
+WIP	Weathering Index of Parker, calculated from the proportional contributions of Na, Mg, K, and Ca normalised by their bond strengths. WIP decreases with increasing weathering intensity, with values of 15–40 for residual clays and 40–80 for alluvial clays.
+Vogt_V_Ratio	Vogt Ratio calculated as (Al2O3 + K2O) / (MgO + CaO + Na2O). Values greater than 2 indicate advanced weathering with preferential retention of aluminium and potassium, characteristic of residual terra rossa deposits.
+SiO2_Al2O3	Molar ratio of SiO2 to Al2O3, a proxy for clay mineral maturity. Lower ratios indicate more aluminous (kaolinite-rich) clays characteristic of advanced weathering.
+Al2O3_TiO2	Ratio of Al2O3 to TiO2, used as a source rock composition proxy because both elements are relatively immobile during weathering. Values vary with parent lithology.
+K2O_Na2O	Ratio of K2O to Na2O, reflecting the relative mobility of sodium (highly mobile) versus potassium (moderately mobile, retained in illite) during weathering.
+Fe2O3_MgO	Ratio of Fe2O3 to MgO, useful for distinguishing between iron-enriched residual soils (high ratio) and Mg-bearing alluvial/basaltic clays (lower ratio).
+Rb_Sr	Ratio of Rb to Sr concentrations. This ratio increases with weathering intensity as Sr (hosted in carbonate and plagioclase) is leached preferentially while Rb (hosted in illite) is retained. Residual clays show higher Rb/Sr (approximately 0.25–0.50) than alluvial clays (0.10–0.25).
+La_Sc	Ratio of La to Sc, a standard provenance discrimination ratio. La/Sc increases in felsic/sedimentary sources and decreases in mafic sources.
+Th_Sc	Ratio of Th to Sc, another felsic versus mafic provenance discriminator. Higher values indicate felsic-dominated provenance.
+Cr_V	Ratio of Cr to V. This ratio is elevated (greater than 1.5) in basaltic soils due to extreme Cr enrichment and approximately 0.5–1.0 in non-basaltic clays.
+ICV	Index of Compositional Variability, calculated as (Fe2O3 + K2O + Na2O + CaO + MgO + MnO + TiO2) / Al2O3. ICV values less than 1.0 indicate compositionally mature, recycled sediments (residual clays), while values greater than 1.0 indicate first-cycle, immature sediments (alluvial clays).
  
-9. Sheet 8: Detection_Limit_Flags
-Purpose and Scientific Context
-This sheet provides element-by-element data quality flags for each specimen, classifying each measurement as Above Detection Limit (ADL), Below Detection Limit (BDL), or Near Detection Limit (NDL). Detection limits are calculated as three times the standard deviation of the background signal in the spectral region of the analytical peak. Specimens with excessive numbers of BDL values may be unsuitable for multivariate provenance analysis due to incomplete chemical characterisation.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-[33 Element Flag Columns]: Detection limit status for each element: ADL (concentration exceeds 3x background, reliable quantitation), BDL (concentration below detection limit, value reported as upper bound), NDL (concentration within 3-10x background, quantitation possible but with elevated uncertainty).
-Total_BDL_Count: Total number of elements with concentrations below detection limit for this specimen.
-Pct_Elements_Above_DL: Percentage of the 33-element suite with reliable quantitation (ADL status).
-Analytical_Quality_Grade: Overall quality grade based on BDL count: A (0 BDL), B (1-2 BDL), C (3-5 BDL), D (6+ BDL).
-Usable_For_Provenance: Assessment of whether the specimen provides sufficient elemental coverage for reliable provenance assignment: Yes, Marginal, or No.
+10. Sheet 8: Physical and Geotechnical Properties
+10.1 Sheet Overview
+This sheet documents the physical, geotechnical, and colorimetric properties of 5,000 clay samples. These parameters are directly relevant to the practical suitability of a clay deposit for ceramic production: plasticity determines workability, particle size controls texture, pH influences firing behaviour, and cation exchange capacity (CEC) reflects clay mineral type and abundance. The data enable assessment of which deposits within each site’s catchment territory would have been most attractive to Neolithic potters, who required clays with moderate plasticity (Plasticity Index 10–30), adequate clay content (greater than 20%), and manageable shrinkage behaviour.
+Sheet Name in Workbook: Physical_Properties
+Total Records: 5,000 rows
+Total Columns: 19
+
+10.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format PHY-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Clay_Type	Geochemical clay deposit classification.
+Depth_cm	Sampling depth below the modern ground surface in centimetres.
+Clay_pct_lt2um	Percentage of particles smaller than 2 micrometres in the total sample, representing the clay-size fraction. Terra rossa and basaltic soils exhibit the highest clay content (50–70%), while coastal hamra soils show the lowest (10–25%).
+Silt_pct_2_63um	Percentage of particles between 2 and 63 micrometres (silt fraction). Silt typically comprises 20–40% of most deposit types, with loess deposits showing the highest silt content.
+Sand_pct_gt63um	Percentage of particles larger than 63 micrometres (sand fraction). Sand content is inversely related to clay content, ranging from less than 5% in heavy clay soils to 40–60% in hamra deposits.
+Liquid_Limit_%	Atterberg Liquid Limit: the gravimetric water content at which the soil transitions from a plastic to a liquid state. Values range from approximately 20–120%, with smectite-rich clays exhibiting the highest values due to their high water adsorption capacity.
+Plastic_Limit_%	Atterberg Plastic Limit: the water content at which the soil transitions from a semi-solid to a plastic state. Values range from approximately 10–55%.
+Plasticity_Index	Plasticity Index (PI = Liquid Limit – Plastic Limit), the range of water content over which the clay is workable. Optimal values for hand-built pottery are approximately 10–30%. Very high PI values (greater than 40) indicate excessively sticky, difficult-to-work clays.
+Shrinkage_Limit_%	Shrinkage Limit: the water content below which further drying causes no additional volume decrease. Values range from 6–30%. Low shrinkage limits in smectite-rich clays indicate high susceptibility to drying cracks during pottery manufacture.
+pH	Soil pH measured in a 1:2.5 soil:water suspension. Values range from approximately 5.5–9.0, with calcareous deposits (rendzina, alluvial, Lisan) showing alkaline pH (7.5–8.5) and decalcified terra rossa showing slightly acidic to neutral pH (6.5–7.5).
+CEC_meq_100g	Cation Exchange Capacity in milliequivalents per 100 grams of soil. CEC reflects clay mineral type and abundance: smectite-rich basaltic soils and terra rossa show the highest CEC (30–60 meq/100g), while quartz-dominated hamra deposits show the lowest (3–15 meq/100g).
+Organic_Matter_%	Percentage of organic matter determined by loss on ignition at 400°C or Walkley-Black method. Values range from 0.1–12%, with alluvial valley floor deposits showing the highest organic content.
+Munsell_Dry	Munsell colour notation of the dry sample (e.g., 2.5YR 4/6 denotes Hue 2.5YR, Value 4, Chroma 6). Red hues (2.5YR–5YR) characterise iron-rich terra rossa and hamra, while dark grayish-brown hues (10YR–2.5Y) characterise alluvial and basaltic soils.
+Munsell_Wet	Munsell colour notation of the wet/moist sample, typically 1–2 value units darker than the dry colour.
+Specific_Gravity	Specific gravity (particle density) of the clay solid phase, typically 2.55–2.80 for mineral soils. Higher values indicate iron-rich mineral phases; lower values may indicate organic enrichment.
+Mean_Grain_Phi	Mean grain size expressed in phi (φ) units where φ = –log2(diameter in mm). Higher phi values correspond to finer grain sizes. Clay-dominated deposits show mean phi values of 7–10, while silty/sandy deposits show values of 4–6.
  
-10. Sheet 9: Log10_Transformed
-Purpose and Scientific Context
-This sheet contains the base-10 logarithmic transformations of all 33 elemental concentrations. Log-transformation is the standard pre-processing step in ceramic provenance studies (recommended by Glascock 1992 and the MURR protocol) because it normalises the highly right-skewed distributions typical of geochemical data, stabilises variance across elements measured at vastly different concentration scales (percent vs. sub-ppm), and improves the multivariate normality assumption underlying Mahalanobis distance calculations.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Compositional_Group: Group assignment.
-[33 log10 Element Columns]: Base-10 logarithm of each elemental concentration. For elements in wt%, log10(wt%) is computed directly. For elements in ppm, log10(ppm) is used. Values are computed as log10(max(concentration, 1e-6)) to handle any zero or negative values from background subtraction.
-Centroid_Distance: Euclidean distance in log10-transformed multivariate space from each specimen to its assigned group centroid. Provides a measure of typicality within the compositional group.
-Robust_Distance: Robust Mahalanobis distance computed using minimum covariance determinant (MCD) estimator, less sensitive to outliers than the classical Mahalanobis distance.
+11. Sheet 9: Neutron Activation Analysis (NAA) Results
+11.1 Sheet Overview
+This sheet contains Instrumental Neutron Activation Analysis (INAA) data for 5,000 samples, formatted to conform to the standard reporting protocols of the major Levantine ceramic provenance laboratories (Bonn, Hebrew University of Jerusalem, Missouri University Research Reactor). NAA remains the gold standard for ceramic provenance determination due to its exceptional precision (1–5% RSD for most elements), multi-element capability (25–35 elements simultaneously), and minimal sample requirements (80–200 mg). The data include both major elements reported as weight percent and trace/REE elements reported in ppm, along with laboratory metadata (irradiation codes, sample mass).
+Sheet Name in Workbook: NAA_Results
+Total Records: 5,000 rows
+Total Columns: 23
+
+11.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format NAA-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Clay_Type	Geochemical clay deposit classification.
+Sample_Mass_mg	Mass of the sample pellet submitted for irradiation, in milligrams. Standard NAA protocols require 80–200 mg of homogenised, dried, powdered material.
+Irradiation_Code	Unique alphanumeric code identifying the specific neutron irradiation batch (format IRR-XXXX). Samples within the same irradiation batch share identical neutron flux conditions, enabling batch-level quality control.
+Al_%	Aluminium concentration reported as elemental weight percent (not Al2O3). Conversion factor: Al% = Al2O3% × 0.529.
+Ca_%	Calcium concentration as elemental weight percent. Conversion factor: Ca% = CaO% × 0.714.
+Fe_%	Iron concentration as elemental weight percent. Conversion factor: Fe% = Fe2O3% × 0.699.
+K_%	Potassium concentration as elemental weight percent. Conversion factor: K% = K2O% × 0.830.
+Na_%	Sodium concentration as elemental weight percent. Conversion factor: Na% = Na2O% × 0.742.
+Ti_%	Titanium concentration as elemental weight percent. Conversion factor: Ti% = TiO2% × 0.599.
+Mn_ppm	Manganese concentration in parts per million. Mn is determined with high precision by NAA due to the favourable nuclear properties of 55Mn.
+Sc_ppm	Scandium concentration in parts per million. Sc is one of the most precisely determined elements by NAA and serves as a normalisation element for provenance ratios. Values range from approximately 5–35 ppm, with higher values in mafic (basaltic) sources.
+Cr_ppm	Chromium concentration in parts per million, the primary basaltic provenance indicator.
+Co_ppm	Cobalt concentration in parts per million.
+Rb_ppm	Rubidium concentration in parts per million. Rb is determined by NAA through the 87Rb(n,γ)88Rb reaction.
+Cs_ppm	Caesium concentration in parts per million. Cs is an important discriminator in ceramic provenance studies, with values of 2–10 ppm in Southern Levantine clays. Cs is retained in illite interlayer sites and increases with clay mineral maturity.
+Ba_ppm	Barium concentration in parts per million.
+La_ppm	Lanthanum concentration in parts per million. La is determined with high precision by NAA and is the primary LREE reference element.
+Ce_ppm	Cerium concentration in parts per million.
+Sm_ppm	Samarium concentration in parts per million. Sm is one of the most precisely determined REE by NAA.
+Eu_ppm	Europium concentration in parts per million. Eu is determined with exceptional precision by NAA, making the Eu anomaly calculation highly reliable.
  
-11. Sheet 10: PCA_Scores
-Purpose and Scientific Context
-This sheet presents the principal component scores for all specimens projected onto the first ten principal components extracted from the log10-transformed concentration data. PCA reduces the 33-dimensional chemical space to a lower-dimensional representation that captures the maximum variance, enabling visualisation of compositional group structure in two or three dimensions. The variance explained by each component and outlier diagnostics (Hotelling T-squared and Squared Prediction Error) are included.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Compositional_Group: Assigned group for colour-coding in PCA biplots.
-PC1 through PC10: Scores on principal components 1 through 10. PC1 and PC2 typically capture 40-65% of total variance and provide the primary biplot axes for visualising group separation.
-PC1_Pct_Var through Cumulative_Var_PC3: Percentage of total variance explained by PC1, PC2, and PC3 individually, and cumulative variance through PC3.
-Hotelling_T2: Hotelling T-squared statistic measuring the distance from the multivariate centre in the PC model space. Values exceeding T2_Critical_95 flag potential outliers.
-T2_Critical_95: Critical value of the Hotelling T-squared distribution at the 95% confidence level for the given number of components and specimens.
-Outlier_Flag_T2: Binary flag (Yes/No) indicating whether T2 exceeds the critical value.
-SPE_Residual: Squared Prediction Error (Q-residual) measuring the portion of a specimen's variance not captured by the retained principal components.
-SPE_Critical_95 / Outlier_Flag_SPE: Critical SPE value and binary outlier flag at 95% confidence.
-Cluster_Assignment: Cluster number from k-means clustering in PC space.
-Silhouette_Score: Silhouette coefficient for each specimen's cluster assignment, ranging from -1 (misclassified) to +1 (well-classified).
-Distance_to_Centroid: Euclidean distance to the assigned cluster centroid in PC space.
+12. Sheet 10: X-Ray Fluorescence (XRF) Results
+12.1 Sheet Overview
+This sheet presents Wavelength Dispersive X-Ray Fluorescence (WD-XRF) major oxide analyses for 5,000 samples. XRF is the most widely used technique for routine major element analysis of geological and archaeological materials, offering rapid throughput, non-destructive or minimally destructive analysis, and high precision for major elements (1–3% RSD). The dataset includes instrument specifications, sample preparation methods, and complete major oxide profiles including SO3 and Cl, which are not routinely reported in other techniques. The analytical total provides a quality control metric for each analysis.
+Sheet Name in Workbook: XRF_Results
+Total Records: 5,000 rows
+Total Columns: 19
+
+12.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format XRF-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Clay_Type	Geochemical clay deposit classification.
+Instrument	Specific WD-XRF instrument model used for the analysis. Instruments include Bruker S8 Tiger, PANalytical Axios, Rigaku ZSX Primus, and Thermo ARL PERFORM'X, each with characteristic analytical configurations.
+Prep_Method	Sample preparation method: Fused bead (lithium tetraborate fusion, preferred for accurate major element analysis eliminating mineralogical matrix effects) or Pressed pellet (ground powder compressed into a disc, faster but subject to particle size and mineralogical effects).
+SiO2_%	Silicon dioxide concentration by XRF (wt%).
+Al2O3_%	Aluminium oxide concentration by XRF (wt%).
+Fe2O3_%	Total iron as Fe2O3 by XRF (wt%).
+MgO_%	Magnesium oxide concentration by XRF (wt%).
+CaO_%	Calcium oxide concentration by XRF (wt%).
+Na2O_%	Sodium oxide concentration by XRF (wt%). Note: Na2O determination by XRF is less precise than by NAA or ICP due to its low atomic number.
+K2O_%	Potassium oxide concentration by XRF (wt%).
+TiO2_%	Titanium dioxide concentration by XRF (wt%).
+P2O5_%	Phosphorus pentoxide concentration by XRF (wt%).
+MnO_%	Manganese oxide concentration by XRF (wt%).
+SO3_%	Sulfur trioxide concentration by XRF (wt%). SO3 is not routinely reported in other techniques and reflects the presence of gypsum, pyrite oxidation products, or atmospheric sulfate deposition. Values range from 0–2%.
+Cl_%	Chlorine concentration by XRF (wt%). Cl may be elevated in coastal and evaporitic deposit contexts and in ceramics exposed to saline groundwater.
+Total_%	Analytical total of all reported oxides including LOI, expressed as a percentage. Acceptable totals fall between 98.5–101.5%, providing a quality control metric. Totals significantly outside this range indicate analytical problems or unreported volatile components.
  
-12. Sheet 11: PCA_Loadings
-Purpose and Scientific Context
-This sheet documents the element loadings on principal components 1 through 8, along with comprehensive analytical metadata for each of the 33 measured elements. Loadings indicate the contribution and direction of each element's influence on each principal component. Elements with high absolute loadings on a given PC are the primary drivers of variance captured by that component. The sheet also provides nuclear parameters, analytical characteristics, and recommendations regarding each element's suitability for provenance studies, sensitivity to post-depositional alteration, and response to temper dilution. For the 5,000-row requirement, the 33 elements are replicated with indexed variants to model measurement replications.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Element: Element name with column identifier (e.g., Na_pct, La_ppm) or replicate designation.
-PC1_Loading through PC8_Loading: Loading coefficients on principal components 1 through 8, ranging from -1 to +1. Large positive loadings indicate the element increases in the positive PC direction.
-Communality: Proportion of each element's variance explained by the retained components (sum of squared loadings). Values near 1.0 indicate the element is well-represented by the PC model.
-Element_Group: Geochemical classification: Major, Transition, REE, LILE (Large-Ion Lithophile), HFSE (High-Field-Strength), Chalcophile, or Actinide.
-Atomic_Number: Atomic number of the element.
-Measurement_Count: Counting sequence in which the element is determined: Short, Mid, or Long.
-Typical_Detection_Limit: Detection limit in the native units, representing the minimum reliably quantifiable concentration.
-Analytical_Precision_Pct: Typical relative standard deviation (RSD in %) for the element under routine analytical conditions.
-Recommended_For_Provenance: Assessment of whether the element is recommended for inclusion in multivariate provenance analysis: Yes (reliable), Caution (context-dependent), or No (unreliable).
-Post_Dep_Sensitivity: Susceptibility to post-depositional chemical alteration: Low, Medium, or High.
-Temper_Sensitivity: Degree to which temper additions affect the element's concentration in the ceramic body: Low, Medium, or High.
-Dilution_Correctable: Whether temper dilution effects on this element can be corrected using the Bonn dilution factor method: Yes, Partial, or No.
-Geochemical_Behavior: Geochemical affinity classification: LILE, HFSE, Transition, LREE, MREE, HREE, Chalcophile, Actinide, or Major.
-Isotope_Used: Specific radioactive isotope measured for the element determination (e.g., Na-24, Sc-46, La-140).
-Half_Life_Days: Half-life of the measured radioisotope in days.
-Gamma_Energy_keV: Primary gamma-ray energy used for quantification in keV.
-Count_Sequence: Whether the element is measured in the Short, Mid, or Long counting sequence.
+13. Sheet 11: ICP-MS Results (Extended Trace Element Suite)
+13.1 Sheet Overview
+This sheet presents Inductively Coupled Plasma Mass Spectrometry (ICP-MS) data for an extended suite of trace elements for 5,000 samples. ICP-MS offers the broadest multi-element capability of any routine analytical technique, with detection limits at the sub-parts-per-billion level for most elements. The extended element suite includes lithophile (Li, Be, Ga), siderophile (Sc, V, Cr, Co, Ni), and chalcophile (Cu, Zn, Mo) elements plus the high-field-strength elements (Zr, Nb, Hf) that are particularly diagnostic for provenance determination. The digestion method is recorded because incomplete dissolution of refractory minerals (zircon, chromite) can produce systematic biases.
+Sheet Name in Workbook: ICP_MS_Results
+Total Records: 5,000 rows
+Total Columns: 23
+
+13.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format ICP-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Clay_Type	Geochemical clay deposit classification.
+Region	Physiographic region of origin.
+Digestion_Method	Acid digestion protocol used to dissolve the solid sample prior to solution ICP-MS analysis. Options include HF-HNO3-HClO4 (complete dissolution including silicates), Aqua regia (partial dissolution, does not dissolve silicates), Li2B4O7 fusion (complete dissolution via lithium metaborate fusion), and HF-HNO3 (standard silicate dissolution without perchloric acid).
+Li_ppm	Lithium concentration (ppm). Li substitutes for Mg in clay mineral octahedral sites. Values range from approximately 2–120 ppm.
+Be_ppm	Beryllium concentration (ppm). Be is a lithophile trace element ranging from approximately 0.2–8 ppm. Be is enriched in felsic/evolved sources.
+Sc_ppm	Scandium concentration (ppm). Sc is a key normalisation element for provenance ratios (La/Sc, Th/Sc, Cr/Sc), determined with high precision by ICP-MS. Range: 3–35 ppm.
+V_ppm	Vanadium concentration (ppm).
+Cr_ppm	Chromium concentration (ppm). Note: Cr determination by ICP-MS may be affected by ArC polyatomic interference at mass 52; collision/reaction cell technology is recommended.
+Co_ppm	Cobalt concentration (ppm).
+Ni_ppm	Nickel concentration (ppm).
+Cu_ppm	Copper concentration (ppm).
+Zn_ppm	Zinc concentration (ppm).
+Ga_ppm	Gallium concentration (ppm). Ga substitutes for Al in clay minerals and is a useful proxy for clay mineral abundance. Values range from approximately 5–40 ppm, correlating positively with Al2O3.
+Rb_ppm	Rubidium concentration (ppm).
+Sr_ppm	Strontium concentration (ppm).
+Y_ppm	Yttrium concentration (ppm).
+Zr_ppm	Zirconium concentration (ppm). Note: Zr may be underreported if zircon grains are not fully dissolved by the chosen digestion method.
+Nb_ppm	Niobium concentration (ppm).
+Mo_ppm	Molybdenum concentration (ppm). Mo is a redox-sensitive element ranging from approximately 0.1–8 ppm, with enrichment in organic-rich and reducing environments.
+Cs_ppm	Caesium concentration (ppm).
+Hf_ppm	Hafnium concentration (ppm). Hf co-varies with Zr (Zr/Hf ratio approximately 33–40 in most geological materials) and is a robust provenance indicator. Range: 1–8 ppm.
  
-13. Sheet 12: Cluster_Analysis
-Purpose and Scientific Context
-This sheet presents the results of multiple clustering algorithms applied to the log10-transformed concentration data, enabling comparison of group assignments across different methodological approaches. Algorithms include Ward's hierarchical clustering, k-means with varying k values (8, 10, 12), DBSCAN density-based clustering, and average-linkage agglomerative clustering. Internal validation metrics (silhouette coefficients, Calinski-Harabasz index, Davies-Bouldin index, cophenetic correlation) quantify cluster quality, while comparison with INAA compositional groups assesses agreement between statistical and analyst-derived classifications.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Ward_Cluster: Cluster assignment from Ward's minimum-variance hierarchical clustering method.
-KMeans_Cluster_K8 / K10 / K12: Cluster assignments from k-means clustering with k = 8, 10, and 12 respectively, enabling assessment of sensitivity to the number of clusters.
-DBSCAN_Cluster: Cluster assignment from Density-Based Spatial Clustering of Applications with Noise. Value -1 indicates noise points (outliers not assigned to any cluster).
-Agglom_Average_Link: Cluster assignment from average-linkage agglomerative hierarchical clustering.
-Silhouette_Ward / Silhouette_KMeans8: Silhouette coefficients for Ward and k-means (k=8) assignments per specimen.
-Calinski_Harabasz: Calinski-Harabasz index (variance ratio criterion) measuring the ratio of between-cluster to within-cluster dispersion. Higher values indicate better-defined clusters.
-Davies_Bouldin: Davies-Bouldin index measuring average similarity between each cluster and its most similar cluster. Lower values indicate better separation.
-Cophenetic_Corr: Cophenetic correlation coefficient measuring how faithfully the dendrogram preserves pairwise distances. Values above 0.7 indicate acceptable dendogram fidelity.
-Merge_Distance / Merge_Level: Distance and hierarchical level at which the specimen joins its cluster in the dendrogram.
-Within_Cluster_SS / Between_Cluster_SS / Total_SS: Within-cluster, between-cluster, and total sums of squares for the specimen's cluster assignment.
-Cluster_Size: Number of specimens in the assigned cluster.
-Nearest_Cluster / Inter_Cluster_Dist: Identifier and distance to the nearest alternative cluster, indicating potential for misclassification.
-Assigned_Comp_Group: INAA compositional group from analyst interpretation.
-Agreement_With_INAA: Whether the statistical cluster assignment agrees with the analyst-assigned INAA group: Match, Mismatch, or Ambiguous.
-Confidence_Level: Confidence in the cluster assignment: High, Medium, or Low.
-Misclass_Risk_Pct: Estimated probability of misclassification based on the specimen's position relative to cluster boundaries.
-Notes: Observations regarding clustering anomalies.
+14. Sheet 12: Principal Component Analysis (PCA) Scores
+14.1 Sheet Overview
+This sheet contains Principal Component Analysis scores and cluster assignments for 5,000 samples. PCA is the standard dimensionality reduction technique in ceramic provenance studies, reducing the multi-element compositional space (typically 20–33 elements) to a small number of orthogonal principal components that capture the maximum variance in the dataset. The first two principal components typically explain 55–70% of the total variance and are plotted as bivariate scatter plots to visualise compositional groupings. The PCA scores in this dataset are generated with realistic cluster offsets calibrated to each clay deposit type, simulating the spatial separation that characterises well-resolved provenance groups in actual Levantine archaeometric studies.
+Sheet Name in Workbook: PCA_Scores
+Total Records: 5,000 rows
+Total Columns: 18
+
+14.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format PCA-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Clay_Type	Geochemical clay deposit classification.
+Region	Physiographic region of origin.
+Period	Archaeological period code.
+N_Elements_Used	Number of chemical elements included in the PCA computation. Standard practice in ceramic provenance uses 20–33 elements, typically the full NAA suite or equivalent ICP-MS/XRF data.
+Transform	Data transformation applied prior to PCA computation. The standard approach for compositional data is log10 transformation (base-10 logarithm of concentrations), which normalises skewed distributions and equalises the influence of elements measured at different concentration scales.
+PC1_Score	Score on the first principal component (PC1), which typically explains 40–55% of total variance and separates mafic (basaltic, high positive scores) from felsic/calcareous (negative scores) source signatures. PC1 is dominated by loadings from Fe2O3, TiO2, V, Cr, Co, and Ni (positive) versus SiO2 (negative).
+PC2_Score	Score on the second principal component (PC2), typically explaining 12–18% of total variance. PC2 separates calcareous (high CaO, Sr; negative scores) from silicate-dominated (high K2O, Rb; positive scores) compositions.
+PC3_Score	Score on the third principal component (PC3), typically explaining 7–12% of total variance and dominated by REE and accessory mineral signatures (La, Ce, Th, U, Nb).
+PC4_Score	Score on the fourth principal component (PC4), typically explaining 4–7% of variance, often reflecting chalcophile element (Zn, Cu, As) variation or anthropogenic contamination signals.
+PC5_Score	Score on the fifth principal component (PC5), typically explaining 3–5% of variance, often associated with secondary phosphate/manganese enrichment (P2O5, MnO).
+PC1_Var_%	Percentage of total variance explained by PC1 for the specific analysis run.
+PC2_Var_%	Percentage of total variance explained by PC2.
+PC3_Var_%	Percentage of total variance explained by PC3.
+Cumul_Var_5PC_%	Cumulative percentage of total variance explained by the first five principal components combined. Values typically range from 72–95%, with higher values indicating more effective dimensionality reduction.
+Assigned_Cluster	Cluster identification code (CL-1 through CL-8) assigned through hierarchical cluster analysis (Ward's method) or k-means clustering applied to the PCA score matrix. Clusters correspond to compositional reference groups.
+Silhouette_Coeff	Silhouette coefficient for the individual sample's cluster assignment, ranging from −1 to +1. Values above 0.5 indicate strong cluster membership, values of 0.25–0.50 indicate moderate membership, and values below 0.25 or negative indicate weak or incorrect assignment.
  
-14. Sheet 13: Mahalanobis_Distances
-Purpose and Scientific Context
-This sheet contains the squared Mahalanobis distances from each specimen to each of thirteen reference compositional groups, calculated using the log10-transformed concentration data and the pooled within-group covariance matrix. The Mahalanobis distance accounts for inter-element correlations and differential variances, providing a more rigorous measure of multivariate similarity than Euclidean distance. The Bonn modified Mahalanobis distance with dilution factor correction is employed, following the methodology of Beier and Mommsen (1994).
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-True_Group: Known or hypothesised compositional group for validation purposes.
-D2_UGA_Local_A through D2_TKaD: Squared Mahalanobis distance to each of 13 reference groups: UGA_Local_A, UGA_Local_B, UGA_Local_C, UGA_Cooking, MYBE, TIR, ACb2, CypH, CypG, CypE, SidA, TKaA, TKaD.
-Min_D2 / Min_D2_Group: Smallest squared Mahalanobis distance and the corresponding best-matching reference group.
-Second_Min_D2 / Second_Min_Group: Second-smallest distance and corresponding group, enabling assessment of assignment ambiguity.
-D2_Ratio: Ratio of second-minimum to minimum D2. Values close to 1.0 indicate ambiguous assignment between two groups; values >3.0 indicate unequivocal assignment.
-Dilution_Factor: Best-fit dilution factor (f) estimated from the Bonn modified Mahalanobis procedure, correcting for non-plastic temper dilution of trace elements.
-N_Elements_Used: Number of elements included in the Mahalanobis calculation (typically 20-28 after exclusion of unreliable elements).
-DF_Numerator / DF_Denominator: Degrees of freedom for the F-distribution used to convert D2 to membership probability.
-Chi2_Critical_95 / Chi2_Critical_99: Critical chi-squared values at 95% and 99% confidence levels for the given degrees of freedom.
+15. Sheet 13: Discriminant Function Analysis (DFA) Classification
+15.1 Sheet Overview
+This sheet presents Discriminant Function Analysis results and group classification probabilities for 5,000 samples. DFA is the primary supervised classification technique in ceramic provenance studies, maximising the separation between predefined compositional reference groups. Unlike PCA (unsupervised), DFA uses known group assignments to compute linear functions that optimally discriminate among groups. The classification includes Mahalanobis distance metrics, group membership probabilities, and Wilks' Lambda statistics quantifying overall discriminatory power. The dataset simulates 8 compositional reference groups typical of a comprehensive Southern Levantine provenance study.
+Sheet Name in Workbook: DFA_Classification
+Total Records: 5,000 rows
+Total Columns: 17
+
+15.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format DFA-XXXXX.
+Site_Code	Three-letter site abbreviation.
+Clay_Type	Geochemical clay deposit classification.
+Region	Physiographic region of origin.
+Period	Archaeological period code.
+DF1_Score	Score on the first discriminant function (DF1), which maximises the ratio of between-group to within-group variance and typically accounts for 70–97% of the discriminatory power.
+DF2_Score	Score on the second discriminant function (DF2), orthogonal to DF1.
+DF3_Score	Score on the third discriminant function (DF3).
+Assigned_Group	Compositional reference group to which the sample is classified with highest posterior probability (GRP-1 through GRP-8).
+Group_Probability	Posterior probability of membership in the assigned group, ranging from 0.30 to 1.00. Higher probabilities indicate more confident group assignment. The standard threshold for secure assignment is typically p > 0.05 using the Mahalanobis distance criterion.
+Second_Best_Group	Compositional reference group with the second-highest posterior probability, useful for identifying ambiguous assignments and potential group overlap.
+Second_Probability	Posterior probability of membership in the second-best group.
+Mahalanobis_D2	Squared Mahalanobis distance from the sample to the centroid of its assigned group. D2 accounts for inter-variable correlations and group covariance structure. Within-group D2 values typically range from 1–6 for well-defined groups, with values above the chi-squared critical threshold (approximately 18.3 for 10 variables at α = 0.05) indicating potential outliers.
+Within_Group_D2	Squared Mahalanobis distance calculated using only the within-group covariance matrix, providing a measure of how centrally located the sample is within its assigned group.
+Wilks_Lambda	Wilks' Lambda statistic for the overall discriminant model, ranging from 0 (perfect discrimination) to 1 (no discrimination). Well-separated reference groups produce values of 0.01–0.05, while overlapping groups yield values of 0.1–0.3.
+Classification	Classification accuracy flag: Correct (sample assigned to its known group) or Misclassified (sample assigned to an incorrect group). Overall classification accuracy in well-resolved Levantine provenance studies is typically 85–98%.
+N_Variables	Number of chemical variables used in the discriminant functions.
  
-15. Sheet 14: Group_Membership_Prob
-Purpose and Scientific Context
-This sheet converts the Mahalanobis distances from Sheet 13 into posterior membership probabilities for each reference group, providing the probabilistic framework for provenance assignment. Probabilities are computed assuming multivariate normal distributions within each group and equal prior probabilities across groups. Specimens are assigned to the group with the highest posterior probability, with classification confidence assessed by the ratio of first-to-second highest probabilities. Jackknifed (leave-one-out) cross-validation results validate the robustness of each assignment.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-True_Group: Known compositional group.
-P_UGA_Local_A through P_TKaD: Posterior membership probability for each of the 13 reference groups, normalised to sum to 1.0 across all groups.
-Max_Prob / Assigned_Group: Highest membership probability and corresponding group assignment.
-Second_Prob / Second_Group: Second-highest probability and corresponding group.
-Prob_Ratio: Ratio of maximum to second-highest probability. Values >5 indicate high classification confidence.
-Classification_Confidence: Qualitative confidence assessment: High (Max_Prob > 0.6), Medium (0.3-0.6), or Low (<0.3).
-Jackknifed_Class: Group assignment from jackknifed (leave-one-out) cross-validation, testing whether the specimen classifies consistently when removed from its reference group.
-Jackknife_Match: Whether the jackknifed classification matches the full-dataset classification: Yes or No.
-Cross_Val_Prob: Posterior probability from the jackknifed classification.
-Posterior_Prob: Posterior probability computed using Bayesian methods with archaeological prior information.
-Prior_Prob: Equal prior probability (1/number of groups) used in the baseline classification.
+16. Sheet 14: Site Catchment and Resource Territory Analysis
+16.1 Sheet Overview
+This sheet records spatial and logistical parameters for 5,000 records relating to the clay procurement territories of Neolithic sites. The data are structured around Dean Arnold's ethnographic threshold model, which demonstrates that approximately 85% of traditional potters procure clay within 7 km of their production site. The sheet integrates GIS-derived cost-surface analysis with archaeological site catchment parameters, enabling spatial modelling of resource territory extent, overlap, and competition. Parameters include distances to clay, temper, and water sources; walking time estimates based on terrain cost surfaces; and Arnold zone classifications for each procurement relationship.
+Sheet Name in Workbook: Site_Catchment
+Total Records: 5,000 rows
+Total Columns: 19
+
+16.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format SCA-XXXXX for Site Catchment Analysis.
+Site_Name	Full archaeological site name.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Period	Archaeological period code.
+Latitude	Latitude of the site/sampling point in decimal degrees (WGS84).
+Longitude	Longitude of the site/sampling point in decimal degrees (WGS84).
+Elevation_m	Elevation of the site above (or below) mean sea level in metres. Jordan Valley sites exhibit negative elevations (to –380 m near the Dead Sea).
+Clay_Source_Dist_km	Straight-line distance from the archaeological site to the identified clay source in kilometres. Distribution is log-normal with a mode around 2 km, reflecting the concentration of procurement within Arnold's preferred and typical zones.
+Temper_Source_Dist_km	Distance from the site to the nearest source of tempering material in kilometres. Temper procurement distances are generally shorter than clay procurement distances because suitable rock outcrops are often more abundant than workable clay deposits.
+Water_Source_Dist_km	Distance from the site to the nearest perennial water source in kilometres. Water proximity is essential for both clay preparation (slaking, levigation) and general site location in the semi-arid Southern Levantine environment.
+Walking_Time_min	Estimated one-way walking time from the site to the clay source in minutes, calculated using a GIS cost-surface model incorporating slope gradient and terrain roughness. Values are calculated as approximately 15 minutes per kilometre on flat terrain with adjustments for slope.
+Cost_Surface_Value	Cumulative cost-surface value from the site to the clay source, derived from an anisotropic least-cost path analysis using a digital elevation model. Higher values indicate greater terrain difficulty and energy expenditure.
+Catchment_Area_km2	Total area of the site catchment zone in square kilometres, calculated for standard radii of 1 km (3.14 km2), 2 km (12.57 km2), 5 km (78.54 km2), or 10 km (314.16 km2).
+N_Clay_Sources_5km	Number of distinct clay sources identified within a 5 km radius of the site. Higher values indicate greater resource diversity and procurement options.
+N_Clay_Sources_10km	Number of distinct clay sources identified within a 10 km radius of the site.
+Arnold_Zone	Classification of the procurement distance according to Arnold's ethnoarchaeological threshold model: Preferred (<1 km), Typical (1–4 km), Threshold (4–7 km), or Non-local (>7 km).
+Terrain_Type	Dominant terrain morphology between the site and the clay source. Categories include Flat alluvial, Gentle slope, Moderate slope, Steep wadi, Plateau, and Valley floor.
+Slope_Degrees	Average terrain slope along the path from the site to the clay source, measured in degrees. Higher slopes increase travel time and energy cost.
  
-16. Sheet 15: MYBE_Reference_Group
-Purpose and Scientific Context
-This sheet provides the complete INAA concentration data for 5,000 specimens assigned to the MYBE (Mycenae/Berbati) reference group, the most extensively characterised compositional group in Aegean archaeometry. The MYBE group encompasses ceramics produced in the northeastern Peloponnese, primarily in the Argolid region around Mycenae and the Berbati Valley. This reference dataset, compiled from analyses at the Bonn and MURR laboratories, serves as the primary benchmark against which potential Mycenaean imports at Ugarit are evaluated.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Unique identifier within the MYBE reference dataset.
-Site_Origin: Archaeological site from which the reference specimen was recovered: Mycenae, Berbati, Tiryns, Midea, Asine, Dendra, Prosymna, Argos, Nauplion, or Lerna.
-Vessel_Type: Morphological classification of the vessel form.
-LH_Phase: Late Helladic ceramic phase: LH IIIA1, LH IIIA2 Early, LH IIIA2 Late, LH IIIB1, LH IIIB2, or LH IIIC Early.
-[21 Element Columns]: Concentrations for 21 key elements: Na%, Al%, K%, Ca%, Ti%, V ppm, Mn ppm, Ba ppm, Dy ppm, La ppm, Sm ppm, Ce ppm, Eu ppm, Sc ppm, Cr ppm, Fe%, Co ppm, Th ppm, Hf ppm, Ta ppm, Rb ppm.
+17. Sheet 15: Production Organisation and Craft Economy
+17.1 Sheet Overview
+This sheet compiles 5,000 records documenting the organisational parameters of ceramic production at Neolithic Southern Levantine communities. The data address the fundamental question of whether pottery production was organised at the household, community, or specialist level during the Pottery Neolithic period. Key indicators include the coefficient of variation of vessel rim diameters (a standardisation metric inversely proportional to specialisation), estimated production volumes, the percentage of locally versus non-locally produced pottery, and the inferred production locus. The evidence overwhelmingly indicates household-level production with minimal specialisation throughout the Neolithic period.
+Sheet Name in Workbook: Production_Org
+Total Records: 5,000 rows
+Total Columns: 20
+
+17.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format PRD-XXXXX for Production Organisation.
+Site_Name	Full archaeological site name.
+Site_Code	Three-letter site abbreviation.
+Period	Archaeological period code.
+Region	Physiographic region of origin.
+Estimated_Pop	Estimated population of the site during the specified period, based on site area and assumed population density (typically 100–300 persons per hectare for Neolithic settlements). Values range from 30 to 600 individuals.
+N_Households	Estimated number of households at the site, calculated from population estimates assuming average household sizes of 4–6 persons.
+Vessels_Per_HH_Year	Estimated number of ceramic vessels produced per household per year, derived from ethnographic analogy and vessel breakage rates. Values range from 8–25 vessels per household annually.
+Annual_Clay_kg	Estimated annual clay consumption per household in kilograms, calculated from vessel count and average vessel mass. Values range from 20–60 kg, representing a readily obtainable quantity from local sources.
+CV_Rim_Diameter_%	Coefficient of variation of vessel rim diameters within the site assemblage, expressed as a percentage. High CV values (25–58%) indicate low standardisation characteristic of household production, while low CV values (less than 15%) would indicate specialised production with standardised output.
+Standardization_Index	Composite standardisation index (0–1 scale) derived from multiple morphometric variables including rim diameter, wall thickness, and vessel height. Values closer to 0 indicate low standardisation (household production); values closer to 1 indicate high standardisation (specialised production).
+Pct_Local_Production	Percentage of the ceramic assemblage identified as locally produced based on petrographic and geochemical provenance analysis. Neolithic assemblages typically show greater than 90% local production.
+Pct_Non_Local	Percentage of the ceramic assemblage identified as non-locally produced (imported through exchange). Values are typically less than 5–10% during the Pottery Neolithic.
+Firing_Events_Year	Estimated number of firing events conducted per year at the site. Seasonal constraints (dry season preference) limit firing opportunities to approximately 2–8 events per year.
+Vessels_Per_Firing	Estimated number of vessels fired simultaneously per firing event. Open-pit/bonfire firings can accommodate 5–25 vessels depending on fire size and vessel dimensions.
+Production_Season	Inferred seasonal timing of pottery production: Spring, Summer, Spring-Summer, Spring-Autumn, or Year-round. Mediterranean climate constraints favour production during the dry months (April–September).
+Specialization_Level	Inferred level of craft specialisation: Household (all families produce their own pottery), Household+ (some households produce small surpluses), Part-time specialist (individuals known for pottery skill produce for wider community), or Community specialist (dedicated potter serving entire community). Neolithic assemblages overwhelmingly indicate Household or Household+ levels.
+Kiln_Type	Type of firing installation documented at the site: Open pit, Bonfire, Simple updraft, or None documented. No specialised kilns are known from the Pottery Neolithic of the Southern Levant.
+Est_Firing_Temp_C	Estimated average firing temperature in degrees Celsius for the site assemblage.
+Production_Locus	Inferred spatial location of pottery production activities within the settlement: Domestic courtyard, Open area, Designated quarter, or Unknown.
  
-17. Sheet 16: Cypriot_Reference_Group
-Purpose and Scientific Context
-This sheet contains the INAA reference data for 5,000 specimens representing the two major Cypriot compositional groups: CypH and CypG, as defined by the Bonn laboratory's classification system. CypH encompasses ceramics from the western and southern regions of Cyprus, characterised by elevated Cr from Troodos ophiolite-derived sediments. CypG represents productions from eastern and northern Cyprus with distinct geochemical signatures.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Unique identifier within the Cypriot reference dataset.
-Cypriot_Group: Sub-group classification: CypH or CypG.
-Site_Origin: Archaeological site on Cyprus: Enkomi, Hala Sultan Tekke, Kalavasos-Ayios Dhimitrios, Maroni-Vournes, Kition, Kouklia-Palaepaphos, Toumba tou Skourou, Maa-Palaeokastro, Pyla-Kokkinokremos, Sinda, Apliki, Athienou, Alassa, Myrtou-Pigadhes, or Episkopi-Bamboula.
-Ware_Category: Cypriot ware type: Base Ring I/II, White Slip I/II, White Shaved, Red Lustrous, Monochrome, Plain White, Bucchero, Pithos, or Handmade.
-LC_Phase: Late Cypriot chronological phase: LC IIA, LC IIB, LC IIC, LC IIIA, or LC IIIB.
-[20 Element Columns]: Concentrations for 20 key elements matching the MYBE reference format for direct inter-group comparison.
+18. Sheet 16: Provenance Assignment and Source Attribution
+18.1 Sheet Overview
+This sheet presents the integrated provenance determinations for 5,000 ceramic samples, synthesising evidence from geochemical analysis, petrographic examination, and multivariate statistical classification. Each record represents the final provenance attribution for an individual sherd, including the assigned clay source type, parent geological formation, procurement distance, confidence level, and the analytical methods supporting the determination. The sheet also records whether the sample is classified as locally produced or exchanged, and the inferred exchange network context where applicable. This integration of multiple independent analytical lines of evidence is the standard practice in modern Levantine ceramic provenance research.
+Sheet Name in Workbook: Provenance_Assign
+Total Records: 5,000 rows
+Total Columns: 18
+
+18.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format PRV-XXXXX for Provenance assignment.
+Site_Code	Three-letter site abbreviation.
+Region	Physiographic region of origin.
+Period	Archaeological period code.
+Vessel_Type	Morphological vessel form classification.
+Assigned_Clay_Source	Geochemical clay source type assigned through the integrated provenance determination process.
+Source_Formation	Specific geological formation identified as the source of the clay raw material.
+Source_Distance_km	Estimated distance from the archaeological site to the assigned clay source in kilometres.
+Confidence_Level	Qualitative assessment of the reliability of the provenance assignment: High (consistent results across multiple analytical methods), Moderate (generally consistent with minor ambiguities), or Low (significant uncertainty or conflicting indicators).
+Method_Primary	Primary analytical method supporting the provenance determination.
+Method_Secondary	Secondary analytical method providing corroborating evidence.
+DFA_Group	Compositional reference group assigned by Discriminant Function Analysis (GRP-1 through GRP-8).
+DFA_Probability	Posterior probability of DFA group membership.
+PCA_Cluster	Cluster assignment from Principal Component Analysis and hierarchical clustering (CL-1 through CL-8).
+Mahalanobis_D2	Squared Mahalanobis distance to the assigned group centroid.
+Local_vs_NonLocal	Binary classification: Local (clay source within 7 km of the archaeological site, consistent with Arnold's procurement threshold) or Non-local (clay source beyond 7 km, implying exchange or unusually distant procurement).
+Exchange_Network	Characterisation of the exchange context for non-local ceramics: None (locally produced), Intra-regional (exchange within the same physiographic region), Inter-regional (exchange between different regions), or Unknown.
+Notes	Free-text field containing analytical observations, caveats, or interpretive comments relevant to the specific provenance determination.
  
-18. Sheet 17: Local_Ugarit_Group
-Purpose and Scientific Context
-This sheet presents the INAA data for 5,000 specimens assigned to the local Ugarit production groups (UGA-Local-A, UGA-Local-B, UGA-Local-C, and UGA-Cooking). These groups represent ceramics manufactured from the calcareous clay sources of the Syrian coastal plain near Ras Shamra. The distinctive geochemical signature of these local productions is characterised by very high CaO (15-22%), low Fe (2-3.5%), low Sc (8-14 ppm), and depressed REE abundances relative to Aegean and Cypriot imports.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Unique identifier within the local Ugarit dataset.
-Local_Subgroup: Sub-group classification: UGA-Local-A, UGA-Local-B, UGA-Local-C, or UGA-Cooking.
-Production_Area: Hypothesised production location within the Ugarit settlement complex.
-Clay_Source_Ref: Reference clay source sample identifier linking to Clay_Source_Samples sheet.
-Temper_Type / Temper_Pct: Type and volumetric percentage of deliberately added temper inclusions.
-[19 Element Columns]: Concentrations for 19 key elements characterising the local production signature.
+19. Sheet 17: Firing Temperature Estimation
+19.1 Sheet Overview
+This sheet documents firing temperature estimates for 5,000 ceramic samples, derived from multiple independent analytical indicators. Firing temperature is a critical parameter for understanding Neolithic pyrotechnological capability and its relationship to clay source selection. The dataset records both point estimates and ranges, along with the specific estimation method employed. Mineral transformation indicators (calcite decomposition at approximately 700°C, illite destruction at approximately 850°C, quartz inversion at 573°C, gehlenite neoformation above 800°C) are recorded as binary fields, providing an internal consistency check against the temperature estimate. Vitrification degree, core/margin coloration, and Mohs hardness provide additional corroborating evidence.
+Sheet Name in Workbook: Firing_Temp_Est
+Total Records: 5,000 rows
+Total Columns: 19
+
+19.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format FTE-XXXXX for Firing Temperature Estimation.
+Site_Code	Three-letter site abbreviation.
+Period	Archaeological period code.
+Vessel_Type	Morphological vessel form classification.
+Region	Physiographic region of origin.
+Fabric_Group	Petrographic fabric group assignment (FG-1 through FG-8).
+Est_Firing_Temp_C	Best-estimate original firing temperature in degrees Celsius, representing the peak temperature reached during the firing event. The majority of Neolithic samples cluster between 500–750°C.
+Temp_Range_Low_C	Lower bound of the estimated firing temperature range in degrees Celsius. The range reflects analytical uncertainty inherent in the estimation method.
+Temp_Range_High_C	Upper bound of the estimated firing temperature range in degrees Celsius.
+Estimation_Method	Analytical technique used to estimate firing temperature: Thermal expansion, XRD phase analysis, Mossbauer spectroscopy, Refiring experiment, SEM vitrification, FTIR, or Ceramic color.
+Atmosphere	Inferred firing atmosphere (Oxidizing, Reducing, or Mixed/Incomplete).
+Vitrification_Degree	Degree of glassy phase formation observed by SEM: No vitrification (below approximately 750°C), Initial (approximately 750–850°C), Extensive (approximately 850–950°C), or Complete (above approximately 950°C).
+Calcite_Decomposition	Binary indicator (Yes/No) of whether calcite temper has undergone thermal decomposition (CaCO3 → CaO + CO2), which occurs above approximately 700°C.
+Illite_Preserved	Binary indicator (Yes/No) of whether illite crystal structure is preserved, which is maintained below approximately 850°C.
+Quartz_Inversion	Binary indicator (Observed/Not observed) of the alpha-beta quartz inversion at 573°C, detectable through thermal expansion measurements or dilatometry.
+Gehlenite_Present	Binary indicator (Yes/No) of gehlenite (Ca2Al2SiO7) neoformation, which occurs above approximately 800°C in calcareous ceramics as a reaction product of calcite decomposition with aluminium silicates.
+Core_Color_Munsell	Munsell colour of the sherd cross-section core. Dark cores (10YR 4/1, 2.5Y 5/2) indicate incomplete oxidation, while uniform light colours (5YR 5/6, 7.5YR 6/4) indicate complete oxidation.
+Margin_Color_Munsell	Munsell colour of the sherd cross-section margins, which are typically more oxidised than the core due to direct contact with the firing atmosphere.
+Hardness_Mohs	Mohs scratch hardness of the ceramic body, determined using standard Mohs hardness picks. Low-fired ceramics (below 700°C) typically exhibit hardness of 2–3.5, while medium-fired ceramics (700–850°C) show hardness of 3.5–5.
  
-19. Sheet 18: Bivariate_Element_Pairs
-Purpose and Scientific Context
-This sheet provides pre-calculated element concentrations and ratios for key diagnostic bivariate element pairs used in ceramic provenance scatter plots. Bivariate plots of specific element pairs (e.g., La vs. Sc, Th vs. Hf, Cr vs. Co) have historically been the most intuitive means of visualising compositional group separation. The selection of element pairs follows established archaeometric practice, prioritising combinations of immobile elements that maximise inter-group discrimination while minimising within-group spread.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID / Group: Primary key and compositional group.
-La_ppm / Sc_ppm / La_Sc_Ratio: Lanthanum, scandium, and their ratio. La/Sc discriminates between felsic-dominated (high ratio) and mafic-influenced (low ratio) clay sources.
-Th_ppm / Hf_ppm / Th_Hf_Ratio: Thorium, hafnium, and ratio. Both HFSE/actinide elements are highly immobile; their ratio reflects heavy mineral assemblage provenance.
-Ce_ppm / Eu_ppm / Ce_Eu_Ratio: Cerium, europium, and ratio. Reflects REE fractionation and redox conditions in source sediments.
-Cr_ppm / Co_ppm / Cr_Co_Ratio: Chromium, cobalt, and ratio. Cr/Co is diagnostic for ophiolite-influenced vs. continental clay sources.
-Fe_pct / Ti_pct / Fe_Ti_Ratio: Iron, titanium, and ratio. Reflects iron oxide and detrital heavy mineral abundances.
-Na_pct / Cs_ppm / Na_Cs_Ratio: Sodium, caesium, and ratio. Both alkali elements are susceptible to post-depositional leaching; correlated depletion patterns indicate alteration.
-Rb_ppm / K_pct / Rb_K_Ratio: Rubidium, potassium, and ratio. Rb/K fractionation may indicate differential leaching or clay mineral variations.
-Sr_ppm / Ca_pct / Sr_Ca_Ratio: Strontium, calcium, and ratio. Sr/Ca reflects carbonate mineralogy and temper contributions.
-Sm_ppm / Nd_ppm: Samarium and neodymium concentrations for the Sm-Nd pair, providing additional REE discrimination.
+20. Sheet 18: Grain Size Distribution Analysis
+20.1 Sheet Overview
+This sheet presents comprehensive particle size distribution data for 5,000 clay deposit samples, analysed by laser diffraction granulometry or sieve-pipette methods. Grain size distribution is a fundamental physical property controlling clay workability, shrinkage behaviour, and firing characteristics. The data include seven particle size fractions (clay through coarse sand), four statistical parameters (mean, sorting, skewness, kurtosis in the Folk and Ward system), three percentile values (D10, D50, D90), and the uniformity coefficient. These parameters enable quantitative comparison of clay texture across deposit types and provide essential input for assessing the suitability of natural clay resources for ceramic production without modification (addition of temper).
+Sheet Name in Workbook: Grain_Size_Distrib
+Total Records: 5,000 rows
+Total Columns: 21
+
+20.2 Column Definitions
+The following table provides the complete specification for each column in this sheet, including the column header as it appears in the workbook, and a comprehensive description encompassing data type, expected value range, scientific significance, and interpretive context.
+
+Column Name	Description
+Sample_ID	Unique identifier in the format GSD-XXXXX for Grain Size Distribution.
+Site_Code	Three-letter site abbreviation.
+Clay_Type	Geochemical clay deposit classification.
+Region	Physiographic region of origin.
+Formation	Parent geological formation.
+Depth_cm	Sampling depth below the modern ground surface in centimetres.
+Clay_pct	Percentage of particles in the clay fraction (less than 2 micrometres). This is the most important single textural parameter for ceramic suitability, with values of 20–60% considered optimal for hand-built pottery production.
+Fine_Silt_pct	Percentage of particles in the fine silt fraction (2–20 micrometres). Fine silt contributes to clay plasticity without the extreme shrinkage behaviour of the clay fraction.
+Coarse_Silt_pct	Percentage of particles in the coarse silt fraction (20–63 micrometres). Coarse silt acts as a natural temper, reducing shrinkage and improving drying characteristics.
+Very_Fine_Sand_pct	Percentage of particles in the very fine sand fraction (63–125 micrometres).
+Fine_Sand_pct	Percentage of particles in the fine sand fraction (125–250 micrometres).
+Medium_Sand_pct	Percentage of particles in the medium sand fraction (250–500 micrometres).
+Coarse_Sand_pct	Percentage of particles in the coarse sand fraction (500–2000 micrometres).
+Mean_Phi	Mean grain size expressed in phi (φ) units using the Folk and Ward (1957) graphical method. Higher phi values correspond to finer sediments (phi 8–10 = clay-dominated; phi 4–6 = silt-dominated).
+Sorting_Phi	Standard deviation of the grain size distribution in phi units (Folk and Ward), measuring the spread of particle sizes. Values less than 1.0 indicate well-sorted sediment; values of 1–2 indicate poorly sorted; values greater than 2 indicate very poorly sorted.
+Skewness	Skewness of the grain size distribution (Folk and Ward), measuring asymmetry. Positive skewness indicates a fine-tailed distribution (excess fine particles), characteristic of alluvial clays. Negative skewness indicates a coarse tail.
+Kurtosis	Kurtosis of the grain size distribution (Folk and Ward), measuring the peakedness. Leptokurtic distributions (kurtosis greater than 1.0) indicate concentration around the mean; platykurtic distributions (less than 1.0) indicate broad, flat distributions.
+D10_um	Tenth percentile grain diameter in micrometres: 10% of particles are finer than this value. D10 is sensitive to the fine fraction and influences permeability and capillary behaviour.
+D50_um	Median grain diameter (fiftieth percentile) in micrometres. D50 is the standard summary statistic for central tendency of the grain size distribution.
+D90_um	Ninetieth percentile grain diameter in micrometres: 90% of particles are finer than this value. D90 characterises the coarse tail of the distribution and reflects the maximum natural grain size.
+Uniformity_Coeff	Coefficient of uniformity calculated as D60/D10, where D60 and D10 are the 60th and 10th percentile diameters. Values near 1 indicate very uniform grain size; values greater than 4–6 indicate well-graded (diverse) particle sizes typical of mixed-source alluvial deposits.
  
-20. Sheet 19: Dilution_Corrected
-Purpose and Scientific Context
-This sheet presents elemental concentrations before and after correction for non-plastic temper dilution using the Bonn modified Mahalanobis dilution factor method. When potters add non-plastic temper materials (quartz sand, calcite, grog, shell) to the clay body, all clay-derived trace element concentrations are systematically reduced proportionally. The dilution factor f (estimated as the scalar that minimises the Mahalanobis distance to the best-matching reference group) enables reconstruction of the original clay composition prior to temper addition.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Dilution_Factor_f: Best-fit dilution factor estimated from the Bonn method. Values less than 1.0 indicate dilution (temper addition); values greater than 1.0 may indicate concentration (levigation or differential loss of non-plastic material).
-f_Uncertainty: Propagated uncertainty on the dilution factor estimate.
-CaO_Pct: Calcium oxide content calculated as Ca% x 1.399 (conversion factor from Ca to CaO). Provides a direct estimate of carbonate temper contribution.
-Temper_Vol_Pct / Temper_Type: Estimated temper volume percentage and temper material classification from petrographic analysis.
-[10 Raw Element Columns]: Uncorrected (raw) concentrations for ten selected elements.
-[10 Corrected Element Columns]: Dilution-corrected concentrations computed as raw_concentration / dilution_factor for the same ten elements.
-Correction_Method: Statistical method used for dilution correction: Bonn Modified Mahalanobis.
-N_Elements_Used: Number of elements included in the dilution factor estimation.
-Chi2_Dilution: Chi-squared statistic assessing the goodness-of-fit of the uniform dilution model. Large values indicate non-uniform dilution (e.g., basaltic temper) where the correction may be inappropriate.
-Significant_Dilution: Whether the dilution factor deviates significantly from 1.0: Yes or No.
- 
-21. Sheet 20: Post_Dep_Alteration
-Purpose and Scientific Context
-This sheet provides a comprehensive assessment of post-depositional chemical alteration for each specimen. Ceramics buried for 3,000+ years in the coastal Syrian environment at Ugarit are subject to systematic chemical changes through groundwater interaction, including alkali leaching (Na, K, Rb, Cs depletion), carbonate precipitation (Ca, Sr enrichment), phosphate enrichment from organic decomposition, and manganese oxide biogenic deposition. These alteration effects represent a major confounding factor for provenance studies, as they can shift individual specimens across compositional group boundaries.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Burial_Context: Archaeological context of deposition describing the burial matrix.
-Soil_pH_Est / Groundwater_Exposure: Estimated soil pH and degree of groundwater interaction at the findspot.
-Na/K/Rb/Cs_Depletion_Index: Quantitative indices measuring the depletion of each alkali element relative to its expected concentration. Negative values indicate depletion; positive values indicate enrichment. Calculated as (measured - expected)/expected using immobile element ratios as reference.
-Ca/Sr_Enrichment_Index: Enrichment indices for calcium and strontium, reflecting secondary carbonate precipitation from circulating groundwaters.
-P_Enrichment_ppm: Phosphorus concentration in ppm, indicative of organic matter decomposition in the burial environment. Values exceeding 5,000 ppm suggest significant phosphate contamination.
-Mn/Ba_Enrichment/Alteration_Index: Indices for manganese and barium alteration through biogenic and chemical processes.
-U_Mobility_Index: Uranium mobility assessment reflecting redox-driven redistribution in the burial environment.
-Secondary_Calcite_Flag: Detection of secondary (post-depositional) calcite in the ceramic fabric: Yes, No, or Trace.
-Alkali_Leaching_Severity: Overall severity assessment: None, Mild, Moderate, or Severe.
-Overall_Alteration_Grade: Composite alteration grade: A-Pristine, B-Minor, C-Moderate, or D-Severe.
-Elements_Affected_Count: Number of elements with concentrations significantly altered by post-depositional processes.
-Correctable / Correction_Applied: Whether the alteration is correctable by element exclusion or mathematical correction, and whether such correction was applied.
-Na/K_Original_Est: Estimated original (pre-burial) Na and K concentrations reconstructed from immobile element ratios.
-Alteration_Mechanism: Dominant chemical alteration mechanism identified.
-Burial_Depth_cm / Burial_Duration_Years: Estimated depth and duration of burial.
- 
-22. Sheet 21: Kiln_Load_Variability
-Purpose and Scientific Context
-This sheet directly addresses the central research question of the dataset: the magnitude and patterns of trace element heterogeneity within single kiln-load assemblages. Each row represents one specimen within a defined kiln group, with concentrations for provenance-critical elements alongside within-kiln coefficients of variation and the tau incidence statistic (Harbottle 1976). The tau incidence quantifies whether observed compositional spread exceeds analytical uncertainty, distinguishing genuine compositional heterogeneity from measurement noise.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Kiln_Load_ID / Sample_ID: Kiln group identifier and individual specimen identifier.
-Position_In_Kiln: Estimated position of the specimen within the kiln during firing: Top-Center, Top-Edge, Middle-Center, Middle-Edge, Bottom-Center, Bottom-Edge, Door-Side, Back-Wall.
-Vessel_Type / Firing_Zone: Vessel form and local thermal environment within the kiln structure.
-La/Ce/Sm/Eu/Sc/Cr/Fe/Co/Th/Hf/Ca/Na/K: Concentrations for 13 provenance-critical elements enabling direct assessment of intra-kiln variability for both immobile (REE, Sc, Th, Hf) and mobile (Ca, Na, K) elements.
-Within_Kiln_CV_La/Sc/Ca/Na: Coefficients of variation (%) for La, Sc, Ca, and Na within the kiln load, computed across all specimens sharing the same Kiln_Load_ID. Low CVs for La and Sc (2-6%) versus high CVs for Ca and Na (8-35%) demonstrate the differential impact of within-kiln processes on different elements.
-Kiln_Mean_La / Kiln_SD_La: Mean and standard deviation of La concentration within the kiln load.
-Tau_Incidence_Ca: Tau incidence statistic for Ca within the kiln load, quantifying the number of standard deviations by which the observed compositional spread exceeds analytical uncertainty. Values >1.0 indicate genuine compositional heterogeneity beyond measurement error.
- 
-23. Sheet 22: Clay_Source_Samples
-Purpose and Scientific Context
-This sheet presents INAA compositional data for 5,000 raw clay source samples collected from geological deposits in the vicinity of Ugarit and across the broader northern Levantine coastal region. These clay samples provide the geochemical baseline against which ceramic compositions are compared, testing the fundamental provenance assumption that ceramic compositions reflect their source clay compositions (modified by temper additions and firing effects).
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Clay_Sample_ID: Unique identifier for each clay source sample.
-Source_Location: Named geological sampling locality.
-GPS_Latitude / GPS_Longitude: Geographic coordinates of the sampling point in decimal degrees.
-Geological_Formation: Geological formation from which the clay was sampled.
-Clay_Mineral_Type: Dominant clay mineral assemblage determined by X-ray diffraction.
-Sampling_Depth_cm / Color_Munsell: Depth of collection and colour description.
-Plasticity_Index: Atterberg plasticity index quantifying the clay's workability.
-Calcium_Carbonate_Pct / Organic_Matter_Pct / pH: Geotechnical properties of the raw clay deposit.
-[12 Element Columns]: INAA concentrations for 12 key elements enabling comparison with ceramic compositional groups.
-Matching_Ceramic_Group: Compositional group whose ceramic compositions best match this clay source.
- 
-24. Sheet 23: Firing_Temp_Effects
-Purpose and Scientific Context
-This sheet examines the relationship between estimated firing temperature and elemental concentrations, addressing the question of whether kiln temperature variations within a single firing event can produce compositional heterogeneity that mimics inter-source differences. While INAA-measured trace elements are generally considered temperature-stable, research by Buxeda i Garrigos et al. (2001) demonstrated that very high firing temperatures (>1050 degrees C) can trigger secondary mineralogical reactions that selectively alter Na, K, and Rb through analcime crystallisation and alkali leaching.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Estimated_Temp_C / Temp_Range: Estimated peak firing temperature and categorical range.
-Mineral_Phase / Vitrification_Stage: Diagnostic mineral assemblage and vitrification degree.
-Porosity_Pct / Hardness_Mohs: Physical properties related to firing completeness.
-Na/K/Rb/Cs: Alkali element concentrations that may be depleted at temperatures >1050 degrees C through analcime crystallisation.
-Ca/Fe/Sc/La/Ce/Eu/Th: Concentrations of temperature-stable elements for comparison.
-Na_K_Ratio: Na/K ratio as a sensitive indicator of differential alkali loss during high-temperature firing.
-Analcime/Gehlenite/Diopside/Mullite/Cristobalite_Detected: Binary flags for detection of specific high-temperature mineral phases by XRD, providing independent confirmation of estimated firing temperatures.
-Temp_Classification: Overall assessment of firing adequacy: Well-Fired, Under-Fired, Over-Fired, Optimal, or Variable.
- 
-25. Sheet 24: QC_Standards
-Purpose and Scientific Context
-This sheet documents the quality control measurements performed on certified reference materials (CRMs) and in-house pottery standards throughout the analytical campaign. Regular analysis of CRMs at intervals of approximately one per 10-15 unknowns provides ongoing verification of analytical accuracy and precision. The sheet records measured concentrations alongside certified values and computed bias statistics, enabling detection of systematic instrumental drift or calibration errors that could compromise provenance assignments.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Run_ID: Unique identifier for each QC measurement run.
-Standard_Name: Name of the certified reference material: SRM-1633b (coal fly ash), SRM-688 (basalt rock), SRM-278 (obsidian), Ohio Red Clay, New Ohio Red Clay, NIST-679, Bonn Pottery Standard, or Old Pottery Standard.
-Batch_Date / Analyst: Date of measurement and analyst initials for traceability.
-[Element Measured/Certified/Bias Triplets]: For major elements (Na, Al, K, Ca): measured concentration, certified concentration, and percentage bias ((measured-certified)/certified x 100). Bias values within plus or minus 5% indicate acceptable accuracy.
-[Element Measured/Certified Pairs]: For trace elements (Fe, Sc, La, Ce, Th): measured and certified concentrations for direct comparison.
-Z_Score_Mean: Mean Z-score across all quality-controlled elements, providing a single-number summary of analytical performance for each standard run. Values less than 2.0 indicate satisfactory accuracy.
- 
-26. Sheet 25: Provenance_Summary
-Purpose and Scientific Context
-This sheet provides the final integrated provenance determination for each of the 5,000 ceramic specimens, synthesising all preceding analytical evidence: INAA compositional group assignment, Mahalanobis distance classification, PCA cluster membership, dilution correction results, post-depositional alteration assessment, and petrographic/typological concordance. This sheet represents the ultimate deliverable of the analytical campaign, translating chemical data into archaeological interpretations regarding ceramic production origins, trade routes, and exchange networks in the Late Bronze Age Eastern Mediterranean.
-Dimensions: 5,001 rows (1 header + 5,000 data records).
-Column Descriptions
-Sample_ID: Primary key.
-Ware_Type / Period / Site: Archaeological context from Sample_Inventory.
-INAA_Group: Compositional group from multivariate statistical analysis.
-Mahal_Best_Group / Mahal_D2 / Mahal_Prob: Best-matching reference group, squared Mahalanobis distance, and membership probability from the modified Mahalanobis analysis.
-PCA_Cluster / Cluster_Agreement: Cluster assignment from PCA-based clustering and agreement with INAA group.
-Dilution_Factor / Alteration_Grade: Temper dilution correction factor and post-depositional alteration severity grade.
-Final_Provenance / Provenance_Confidence: Integrated provenance determination and confidence level: High, Medium, or Low.
-Alternative_Provenance / Alt_Prob: Second-most-likely provenance and its probability, acknowledging classification ambiguity.
-Geographic_Origin / Production_Region: Interpreted geographic origin and production region.
-Import_Export_Status: Classification as Import, Local Production, Local Imitation, Uncertain, or Re-Export based on concordance of chemical, petrographic, and typological evidence.
-Trade_Route: Hypothesised trade route: Aegean Maritime, Cypriot Maritime, Overland Levantine, Coastal Cabotage, Nile-Levant, or Local Production.
-Distance_From_Source_km: Estimated straight-line distance from the inferred production source to the findspot at Ugarit, in kilometres.
-Chronological_Phase / Cultural_Association: Chronological period and cultural attribution of the ceramic tradition.
-Publication_Reference: Published study in which the specimen or its compositional group is described.
-Analytical_Notes: Summary notes regarding analytical quality, classification caveats, or interpretive considerations.
- 
-27. Conclusion and Methodological Notes
-The 25-sheet workbook described herein provides a comprehensive, internally consistent dummy dataset that faithfully models the analytical complexity inherent in INAA-based ceramic provenance studies at Late Bronze Age Ugarit. The data generation methodology employed group-specific multivariate normal distributions parameterised from published compositional reference groups, with element-specific coefficients of variation calibrated to replicate the observed within-group spreads reported in the Bonn, MURR, and Berkeley analytical databases.
-The dataset is explicitly designed to illustrate the central analytical challenge investigated in this research: that intra-kiln compositional variability, arising from clay source heterogeneity, temper dilution effects, firing-induced alkali mobility, and post-depositional alteration, can generate within-group compositional spreads that overlap with inter-group differences, thereby confounding provenance assignment. The hierarchy of element reliability documented throughout the worksheets confirms that rare earth elements, scandium, thorium, hafnium, and tantalum provide the most robust provenance discrimination, while alkali elements, calcium, and volatile elements require careful evaluation and, in many cases, exclusion from multivariate analysis.
-All data values are synthetically generated for research and educational purposes. No values in this workbook represent actual analytical measurements of real archaeological specimens. The compositional patterns, group structures, and statistical relationships are modelled upon published data to ensure scientific plausibility, but should not be cited as empirical evidence in scholarly publications.
+21. Appendix: Reference Codes
+21.1 Period Codes
+Code	Period Name	Date Range (cal BCE)
+PPNA	Pre-Pottery Neolithic A	9500–8500
+EPPNB	Early Pre-Pottery Neolithic B	8500–8000
+MPPNB	Middle Pre-Pottery Neolithic B	8000–7500
+LPPNB	Late Pre-Pottery Neolithic B	7500–6500
+PPNC	Pre-Pottery Neolithic C	6500–6000
+YAR	Yarmukian	6400–5800
+LOD	Lodian (Jericho IX)	6000–5500
+WR	Wadi Rabah	5500–4700
+LN	Late Neolithic	5000–4500
+GH	Ghassulian (Early Chalcolithic)	4500–3800
+
+21.2 Clay Type Codes
+Clay Type	Parent Material	Key Geochemical Signature
+Alluvial	Mixed transported sediment	Moderate CaO, mixed trace elements
+Residual_Terra_Rossa	Judea Group limestone/dolomite	High Al₂O₃, Fe₂O₃; low CaO
+Basaltic_Soil	Neogene–Quaternary basalt	Very high Fe₂O₃, TiO₂, Cr, Ni, V
+Coastal_Hamra	Kurkar Fm calcareous sandstone	High SiO₂, moderate CaO
+Lisan_Marl	Lisan Fm lacustrine deposit	Extreme CaO (25–45%), high Sr
+Rendzina	Chalk/marl substrates	High CaO (15–40%), moderate Al₂O₃
+
