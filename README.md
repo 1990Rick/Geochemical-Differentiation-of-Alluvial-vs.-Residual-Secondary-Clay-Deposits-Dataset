@@ -1,0 +1,2 @@
+# Geochemical-Differentiation-of-Alluvial-vs.-Residual-Secondary-Clay-Deposits-Dataset
+This sheet constitutes the master archaeological metadata registry for all 5,000 ceramic specimens analysed in the dataset. Each row represents one individual ceramic sherd or vessel fragment recovered from Late Bronze Age contexts at Ugarit (Ras Shamra), its harbour settlement Minet el-Beida, and the satellite palatial complex at Ras Ibn Hani
