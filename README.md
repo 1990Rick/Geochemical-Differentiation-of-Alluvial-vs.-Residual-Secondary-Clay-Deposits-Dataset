@@ -624,4 +624,3 @@ Basaltic_Soil	Neogene–Quaternary basalt	Very high Fe₂O₃, TiO₂, Cr, Ni, V
 Coastal_Hamra	Kurkar Fm calcareous sandstone	High SiO₂, moderate CaO
 Lisan_Marl	Lisan Fm lacustrine deposit	Extreme CaO (25–45%), high Sr
 Rendzina	Chalk/marl substrates	High CaO (15–40%), moderate Al₂O₃
-
